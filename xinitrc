@@ -4,7 +4,7 @@
 #Esetroot /home/wipeover/kep/backgrounds/skullbg.png
 #/home/wipeover/bin/awesome-status.py&
 unclutter -idle 2 -notclass qemu-system-x86_64 &
-xcompmgr -c&
+#xcompmgr -c&
 synclient HorizTwoFingerScroll=1
 #exec /usr/bin/awesome
 #/home/wipeover/.awesome/keymap.sh&
