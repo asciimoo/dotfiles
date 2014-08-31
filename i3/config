@@ -1,0 +1,194 @@
+# This configuration uses Mod4 and Mod3. Make sure they are mapped properly using xev(1)
+# and xmodmap(1). Usually, Mod4 is Alt (Alt_L) and Mod3 is Windows (Super_L)
+
+# ISO 10646 = Unicode
+font -misc-fixed-*-*-*-*-6-*-*-*-*-*-*-*
+
+# window decoration - 1px border <bp|bn|bb>
+new_window 1pixel
+
+focus_follows_mouse no
+
+#######
+#COLORS #border #bkgrnd #text  #
+#######
+
+client.focused #22AA44 #22AA44 #000000
+
+#toggle bn/bb
+bindsym Mod4+F1 exec i3-msg bn
+bindsym Mod4+F2 exec i3-msg bb
+
+
+# Assign workspaces
+# assign "iceweasel" 2
+assign [class="skype"] chat
+assign [class="gimp"] 5
+
+
+# Use Mouse+Mod4 to drag floating windows to their wanted position
+floating_modifier Mod4
+
+# Fullscreen (Mod4+f)
+bindcode Mod4+41 fullscreen
+
+# Stacking (Mod4+s)
+bindcode Mod4+39 layout stacking
+
+# Tabbed (Mod4+w)
+bindcode Mod4+25 layout tabbed
+
+# Default (Mod4+e)
+bindcode Mod4+26 layout default
+
+# Toggle tiling/floating of the current window (Mod4+Space)
+bindcode Mod4+65 floating toggle
+
+# Go into the tiling layer / floating layer, depending on whether
+# the current window is tiling / floating (Mod4+t)
+bindsym Mod4+n focus mode_toggle
+
+bindsym Mod4+u split vertical
+bindsym Mod4+y split horizontal
+bindsym Mod4+p exec ~/w/pwd.sh/pwd.sh
+bindsym Mod4+Shift+p exec ~/w/pwd.sh/pwd.sh a
+#bindcode Mod4+49 exec sudo chvt 2
+
+# Make the currently focused window a scratchpad
+bindsym Mod4+Shift+b move scratchpad
+
+# Show the first scratchpad window
+bindsym Mod4+b scratchpad show
+
+# Focus (Mod4+h/j/k/l)
+bindcode Mod4+43 focus left
+bindcode Mod4+44 focus down
+bindcode Mod4+45 focus up
+bindcode Mod4+46 focus right
+
+# Focus Container (Mod3+j/k/l/;)
+bindcode Mod3+44 focus parent; focus left
+bindcode Mod3+45 focus parent; focus down
+bindcode Mod3+46 focus parent; focus up
+bindcode Mod3+47 focus parent; focus right
+
+# Move (Mod4+Shift+h/j/k/l)
+bindcode Mod4+Shift+43 move left
+bindcode Mod4+Shift+44 move down
+bindcode Mod4+Shift+45 move up
+bindcode Mod4+Shift+46 move right
+
+# Move Container (Mod4+Shift+j/k/l/;)
+bindcode Mod4+Control+43 focus parent; move left
+bindcode Mod4+Control+44 focus parent; move down
+bindcode Mod4+Control+45 focus parent; move up
+bindcode Mod4+Control+46 focus parent; move right
+
+# Workspaces (Mod4+1/2/…)
+bindcode Mod4+10 workspace term
+bindcode Mod4+11 workspace web
+bindcode Mod4+12 workspace misc
+bindcode Mod4+13 workspace chat
+bindcode Mod4+14 workspace gimp
+bindcode Mod4+15 workspace 6
+bindcode Mod4+16 workspace 7
+bindcode Mod4+17 workspace 8
+bindcode Mod4+18 workspace 9
+bindcode Mod4+19 workspace 10
+
+# Move to Workspaces
+bindcode Mod4+Shift+10 move workspace term
+bindcode Mod4+Shift+11 move workspace web
+bindcode Mod4+Shift+12 move workspace misc
+bindcode Mod4+Shift+13 move workspace chat
+bindcode Mod4+Shift+14 move workspace gimp
+bindcode Mod4+Shift+15 move workspace 6
+bindcode Mod4+Shift+16 move workspace 7
+bindcode Mod4+Shift+17 move workspace 8
+bindcode Mod4+Shift+18 move workspace 9
+bindcode Mod4+Shift+19 move workspace 10
+
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # They resize the border in the direction you pressed, e.g.
+    # when pressing left, the window is resized so that it has
+    # more space on its left
+
+    bindsym h resize shrink left 1 px
+    bindsym Shift+h resize grow left 1 px
+
+    bindsym j resize grow down 1 px
+    bindsym Shift+j resize shrink down 1 px
+
+    bindsym k resize shrink up 1 px
+    bindsym Shift+k resize grow up 1 px
+
+    bindsym l resize grow right 1 px
+    bindsym Shift+l resize shrink right 1 px
+
+    bindcode 36 mode "default"
+}
+
+# Enter resize mode
+bindcode Mod4+27 mode "resize"
+
+# Mod4+Enter starts a new terminal
+bindcode Mod4+36 exec /usr/bin/urxvtc
+
+
+# Mod4+Enter starts screensaver
+bindsym Mod4+F9 exec ~/bin/screensaver
+
+# logconsole
+bindsym Mod4+i exec urxvt -name log -e sudo /usr/bin/grc /home/a/bin/log +ss
+
+# Mod4+Control+c kills the current client
+bindcode Mod4+Control+53 kill
+
+# Mod4+c starts dmenu and launches the selected application
+# for now, we don’t have a launcher of our own.
+bindcode Mod4+54 exec /usr/bin/dmenu_run
+bindcode Mod4+Shift+54 exec i3-input
+
+# Mod4+Shift+e exits i3
+bindcode Mod4+Shift+26 exit
+
+# Mod4+q restarts i3 inplace
+bindcode Mod4+24 restart
+
+# F9 -> screen lock
+#bindsym F9 exec i3lock -d
+#bindsym F8 exec xset dpms force off
+
+
+bindsym Mod4+o exec transset -a --dec .25
+bindsym Mod4+Shift+o exec transset -a --inc .25
+
+# The IPC interface allows programs like an external workspace bar
+# (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
+ipc-socket ~/.i3/ipc.sock
+
+# XXX: Automatically added a call to i3bar to provide a workspace bar
+#exec i3status | i3bar -d
+#exec i3status | i3bar -d -m
+bar {
+    output            LVDS1
+    status_command    i3status
+    position          bottom
+    mode              hide
+    workspace_buttons yes
+    tray_output       none
+
+    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+
+    colors {
+        background #000000
+        statusline #ffffff
+
+        focused_workspace  #ffffff #285577
+        active_workspace   #ffffff #333333
+        inactive_workspace #888888 #222222
+        urgent_workspace   #ffffff #900000
+    }
+}

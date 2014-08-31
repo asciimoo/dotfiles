@@ -1,0 +1,28 @@
+general {
+    colors = true
+    interval = 3
+}
+
+order += "volume master"
+order += "battery 0"
+order += "load"
+order += "time"
+
+volume master {
+   format = "♪: %volume" 
+   device = "default"
+   mixer = "Master"
+   mixer_idx = 0
+}
+
+battery 0 {
+    format = "%status %percentage %remaining"
+}
+
+load {
+    format = "%1min"
+}
+
+time {
+    format = "%Y-%m-%d %H:%M:%S"
+}

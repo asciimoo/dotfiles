@@ -1,0 +1,36 @@
+[
+    {
+        "clean": ["~"]
+    },
+    {
+        "shell": [
+            ["mkdir -p ~/.config ~/.i3", "Creating config directories"],
+            ["mkdir -p ~/bin", "Creating scripts directories"]
+        ]
+    },
+    {
+        "link": {
+            "~/.tmux.conf": "tmux.conf",
+            "~/.Xdefaults": "Xdefaults",
+            "~/.xinitrc": "xinitrc",
+            "~/.conkyrc": "conkyrc",
+            "~/.vimrc": "vimrc",
+            "~/.vim": "vim/",
+            "~/.zshrc": "zshrc",
+            "~/.zsh_theme": "zsh_theme",
+            "~/.oh-my-zsh": "oh-my-zsh",
+            "~/.config/i3": "i3/",
+            "~/.config/i3status": "i3status/",
+            "~/bin/log": "bin/log",
+            "~/bin/gitlog": "bin/gitlog",
+            "~/bin/clock": "bin/clock",
+            "~/bin/mp42mp3": "bin/mp42mp3",
+            "~/bin/pip-upgrade": "bin/pip-upgrade"
+        }
+    },
+    {
+        "shell": [
+            ["git submodule update --init --recursive", "Installing/updating submodules"]
+        ]
+    }
+]

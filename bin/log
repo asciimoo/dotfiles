@@ -1,0 +1,2 @@
+#!/bin/ksh
+tail --retry --quiet --follow=name -n 40 /var/log/syslog | grep --line-buffered -vf /home/a/.logfilterrc

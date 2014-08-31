@@ -1,0 +1,7 @@
+#!/bin/ksh
+for file in $@ ; do
+    echo '-================================-'
+    echo $file
+    echo '-================================-'
+    avconv -i "$file" -ac 2 -f wav - | lame --preset standard - "$file.mp3"
+done
