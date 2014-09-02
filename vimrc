@@ -1614,6 +1614,8 @@ syntax on
 
 
 set so=10
+let g:molokai_original = 1
+colorscheme molokai
 "hi Comment	guifg=yellow guibg=#000050 ctermfg=darkYellow
 hi ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
@@ -1669,6 +1671,4 @@ let g:pymode_folding = 0
 
 let g:pymode_rope = 0
 filetype plugin indent on
-let g:molokai_original = 1
-colorscheme molokai
 hi Normal ctermbg=NONE
