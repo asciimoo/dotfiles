@@ -394,7 +394,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%0
 "   bayerische jagdwitze von maxl querkopf
 "   zwei boxkaempfer jagen eva quer durch sylt
 "   kaufen sie jede woche vier gute bequeme pelze
-"   falsches üben von xylophonmusik quält jeden größeren zwerg.
+"   falsches Ã¼ben von xylophonmusik quÃ¤lt jeden grÃ¶ÃŸeren zwerg.
 "   Bei jedem klugen Wort von Sokrates rief Xanthippe zynisch: Quatsch!
 " English:
 "        the quick brown fox jumps over the lazy dog
@@ -818,17 +818,17 @@ set t_kD=[3~
 "
 " General Editing - Turning umlauts into ascii (for German keyboards)
 "
-" imap ä ae
-" imap ö oe
-" imap ü ue
-" imap ß ss
+" imap Ã¤ ae
+" imap Ã¶ oe
+" imap Ã¼ ue
+" imap ÃŸ ss
 "
-" &#196; -> Ä  :%s/\&#196;/Ä/gc  -> D
-" &#214; -> Ö  :%s/\&#214;/Ö/gc  -> V
-" &#220; -> Ü  :%s/\&#220;/Ü/gc  -> \
-" &#228; -> ä  :%s/\&#228;/ä/gc  -> d
-" &#246; -> ö  :%s/\&#246;/ö/gc  -> v
-" &#252; -> ü  :%s/\&#252;/ü/gc  -> |
+" &#196; -> Ã„  :%s/\&#196;/Ã„/gc  -> D
+" &#214; -> Ã–  :%s/\&#214;/Ã–/gc  -> V
+" &#220; -> Ãœ  :%s/\&#220;/Ãœ/gc  -> \
+" &#228; -> Ã¤  :%s/\&#228;/Ã¤/gc  -> d
+" &#246; -> Ã¶  :%s/\&#246;/Ã¶/gc  -> v
+" &#252; -> Ã¼  :%s/\&#252;/Ã¼/gc  -> |
 "
 " ===================================================================
 " Inserting Dates and Times / Updating Date+Time Stamps
@@ -1648,7 +1648,7 @@ let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
 "Linting
-let g:pymode_lint = 0
+let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
 " Auto check on save
 let g:pymode_lint_write = 1
@@ -1670,5 +1670,11 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 let g:pymode_rope = 0
+let g:pymode_indent = 1
+
 filetype plugin indent on
+
 hi Normal ctermbg=NONE
+
+let mapleader=" "
+set wrap
