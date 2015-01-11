@@ -17,6 +17,7 @@
             "~/.vimrc": "vimrc",
             "~/.vim": "vim/",
             "~/.zshrc": "zshrc",
+            "~/.pylintrc": "pylintrc",
             "~/.zsh_theme": "zsh_theme",
             "~/.oh-my-zsh": "oh-my-zsh",
             "~/.pentadactylrc": "pentadactylrc",

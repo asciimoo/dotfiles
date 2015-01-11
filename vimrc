@@ -1647,6 +1647,8 @@ set nonumber
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
+let g:pymode_lint_config = '$HOME/.pylintrc'
+
 "Linting
 let g:pymode_lint = 1
 let g:pymode_lint_checker = "pyflakes,pep8"
