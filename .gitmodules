@@ -31,3 +31,6 @@
 [submodule "vim/bundle/ctrlp.vim"]
 	path = vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim
+[submodule "vim/bundle/csound-vim"]
+	path = vim/bundle/csound-vim
+	url = https://github.com/kunstmusik/csound-vim
