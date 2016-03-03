@@ -16,6 +16,8 @@ URxvt.perl-ext-common:  default,matcher,font-size
 URxvt.urlLauncher:      /home/a/bin/br luakit
 URxvt.transparent:      true
 black.transparent:      false
+black.font:     xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=normal
+black.boldFont: xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=bold
 URxvt.shading:          20
 *borderless:            1
 
