@@ -26,7 +26,8 @@ PATH="$HOME/bin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/X11
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git debian compleat mercurial svn lol python pip github gnu-utils pip)
+#plugins=(git debian compleat mercurial svn lol python pip github gnu-utils pip tmux)
+plugins=(git debian python gnu-utils)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.zsh_theme
@@ -36,8 +37,8 @@ source $HOME/.zsh_theme
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^R' history-incremental-pattern-search-backward
 HISTFILE=~/.zshhistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 alias bob='espeak -vhu -p 30 -s 145'
 alias enbob='espeak -ven -p 30 -s 145'
 alias alice='espeak -vhu -p 70 -s 160'
@@ -57,6 +58,7 @@ alias la='ls -la'
 alias less='less -R'
 alias fileserver='python -m SimpleHTTPServer'
 alias gpg_fuckin_gui=seahorse
+alias lisp='rlwrap sbcl --load ~/.sbclrc'
 
 # List only directories and symbolic
 # links that point to directories
@@ -172,3 +174,9 @@ function _set_parent_hist() {
 autoload _set_parent_hist
 
 chpwd_functions=(${chpwd_functions[@]} "_set_parent_hist")
+
+MAIL=/home/a/.mail && export MAIL
+export GOROOT=$HOME/t/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/w
+source "$HOME/w/ali/ali.sh"
