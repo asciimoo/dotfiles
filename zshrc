@@ -164,7 +164,7 @@ function _set_parent_hist() {
         }
         cdir="../$cdir"
     done
-    [[ "$lh" != "$HISTFILE" ]] && {
+    [[ "$lh" != "$HISTFILE" ]] && [[ "$lh" != "" ]] && {
         fc -AI "$HISTFILE"
         export HISTFILE="$lh"
         fc -RI "$HISTFILE"

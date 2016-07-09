@@ -489,7 +489,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%0
 " More mailing lists:
   ab MLgnksa    gnksa-workers@babayaga.math.fu-berlin.de (GNKSA Workers List)
   ab MLmuttdev  mutt-dev@mutt.org (Mutt Developer List)
-  ab MLmuttuser mutt-users@mutt.org (Mutt Users List)   
+  ab MLmuttuser mutt-users@mutt.org (Mutt Users List)
   ab MLzsh      zsh-users@math.gatech.edu (ZShell Users List)
 "
 "
@@ -797,7 +797,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%0
 " with mappings you must type this in *literally*!
 " map <C-V>127 <C-H>
 " cmap <C-V>127 <C-H>
-" the same for Linux Debian which uses 
+" the same for Linux Debian which uses
 " imap <Esc>[3~ <C-H>
 " imap        <C-H>
 set t_kb=
@@ -880,7 +880,7 @@ set t_kD=[3~
 " vmap ,cqel  :s/^[><C-I> ]\+$//
   nmap ,cqel :%s/^[>]\+$//
   vmap ,cqel  :s/^[><C-I> ]\+$//
-" NOTE: If the meta sequence "\s" 
+" NOTE: If the meta sequence "\s"
 " The following do not work as "\s" is not a character
 " and thus cannot be part of a "character set".
 "  map ,cqel  :g/^[>\s]\+$/d
@@ -1167,7 +1167,7 @@ au! BufNewFile mutt* let @"="X-Editor: Vim-".version." http://www.vim.org\n"|exe
 " ===================================================================
 " This has become quite big - so I moved it out to another file:
 " http://www.math.fu-berlin.de/~guckes/vim/source/html.vim [980227]
-"  source /usr/share/vim/vim70/syntax/html.vim 
+"  source /usr/share/vim/vim70/syntax/html.vim
 "
 " ===================================================================
 " LaTeX - LaTeX - LaTeX - LaTeX - LaTeX - LaTeX - LaTeX
@@ -1181,7 +1181,7 @@ au! BufNewFile mutt* let @"="X-Editor: Vim-".version." http://www.vim.org\n"|exe
 " ===================================================================
 "
 " encrypt
-  map ;e :%!/bin/sh -c 'gpg -sea 2>/dev/tty'  
+  map ;e :%!/bin/sh -c 'gpg -sea 2>/dev/tty'
 " decrypt
   map ;d :/^-----BEG/,/^-----END/!/bin/sh -c 'gpg -d 2>/dev/tty'
 " sign
@@ -1477,7 +1477,7 @@ au! BufNewFile mutt* let @"="X-Editor: Vim-".version." http://www.vim.org\n"|exe
 " vmap ,ns :.,$s/^ *<DT><\(A.*"\) ADD.*">\(.*\)$/<li> <\1><C-M><C-I>\2/
 "
 " Jump to the last space before the 80th column.
-" map ,\| 80\|F 
+" map ,\| 80\|F
 "
 " extracting variable names urom mutt's init.c
 " :%s/^.*"\([a-z0-9_]*\)".*$/\1/
@@ -1586,7 +1586,7 @@ fun! ToggleFold()
 endfun
 
 " Map this function to Space key.
-noremap <space> :call ToggleFold()<CR> 
+noremap <space> :call ToggleFold()<CR>
 
 noremap! <Esc> <Esc>:match NONE<CR>
 
@@ -1647,11 +1647,16 @@ set nonumber
 let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 
-let g:pymode_lint_config = '$HOME/.pylintrc'
+let g:pymode_options = 0
+let g:pymode_options_max_line_length = 120
 
 "Linting
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+let g:pymode_lint_config = '$HOME/.pylintrc'
+let g:pymode_lint_options_pep8 = {
+        \ 'max_line_length': 120
+    \ }
 " Auto check on save
 let g:pymode_lint_write = 1
 
@@ -1680,3 +1685,10 @@ hi Normal ctermbg=NONE
 
 let mapleader=" "
 set wrap
+setlocal wrap
+function! FormatJavaScript()
+    :%s/;/;\r/g
+    :%s/}/} \r/g
+    :%s/{/ {\r/g
+endfun
+map <F7> <esc>:call FormatJavaScript()<cr>
