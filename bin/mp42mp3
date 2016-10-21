@@ -1,5 +1,5 @@
 #!/bin/ksh
-for file in $@ ; do
+for file in "$@" ; do
     echo '-================================-'
     echo $file
     echo '-================================-'

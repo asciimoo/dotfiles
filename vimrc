@@ -151,7 +151,7 @@ version 5.3
   set   hidden
 "
 "       highlight=8b,db,es,hs,mb,Mn,nu,rs,sr,tb,vr,ws
-  set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
+"  set   highlight=8r,db,es,hs,mb,Mr,nu,rs,sr,tb,vr,ws
 "
 "       hlsearch :  highlight search - show the current search pattern
 "       This is a nice feature sometimes - but it sure can get in the
@@ -270,14 +270,14 @@ version 5.3
 "
 "
 " Set the colors for vim on "xterm"
-  if &term=="xterm"
-    set t_Co=8          " "terminal has eight colors"
-    set t_Sb=[4%p1%dm    " escape sequence for background
-    set t_Sf=[3%p1%dm    " escape sequence for foreground
+"  if &term=="xterm"
+"    set t_Co=8          " "terminal has eight colors"
+"    set t_Sb=[4%p1%dm    " escape sequence for background
+"    set t_Sf=[3%p1%dm    " escape sequence for foreground
 "   source ~/.P/vim/syntax/colors.vim
 "   http://www.math.fu-berlin.de/~guckes/vim/syntax/colors.vim
 " [todo] Add this to the Vim FAQ
-  endif
+"  endif
 
   set t_Co=256  "set terminal colors to 256 - urxvt"
 "
@@ -1380,7 +1380,7 @@ au! BufNewFile mutt* let @"="X-Editor: Vim-".version." http://www.vim.org\n"|exe
     " let mysyntaxfile="~guckes/.P/vim/syntax/syntax.vim"
     " URL: http://www.math.fu-berlin.de/~guckes/vim/syntax/syntax.vim
     " The main/standard syntax file:
-      so /usr/share/vim/vim74/syntax/syntax.vim
+      so /usr/share/vim/vim80/syntax/syntax.vim
     "
     " Use my own syntax file on "mail/news messages":
       let aucommand = "au BufNewFile,BufRead ".MAILNEWSFILES
@@ -1615,6 +1615,7 @@ syntax on
 
 set so=10
 let g:molokai_original = 1
+let g:rehash256 = 1
 colorscheme molokai
 "hi Comment	guifg=yellow guibg=#000050 ctermfg=darkYellow
 hi ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -1630,17 +1631,10 @@ let g:NERDTreeWinPos = "right"
 set pastetoggle=<F2>
 nnoremap <silent> <F3> :TlistToggle<CR>
 nnoremap <silent> <F4> :NERDTreeToggle<CR>
-nnoremap <F1> :set nonumber!<CR>
+nnoremap <F1> :set rnu! \| :set nu!<CR>
 let g:posero_default_mappings = 1
-highlight Pmenu ctermbg=grey gui=bold
 " Execute a selection of code (very cool!)
 " Use VISUAL to select a range and then hit ctrl-h to execute it.
-python << EOL
-import vim
-def EvaluateCurrentRange():
-    eval(compile('\n'.join(vim.current.range),'','exec'),globals())
-EOL
-map <C-d> :py EvaluateCurrentRange()
 execute pathogen#infect()
 set nonumber
 " Documentation
@@ -1686,9 +1680,8 @@ hi Normal ctermbg=NONE
 let mapleader=" "
 set wrap
 setlocal wrap
-function! FormatJavaScript()
-    :%s/;/;\r/g
-    :%s/}/} \r/g
-    :%s/{/ {\r/g
-endfun
-map <F7> <esc>:call FormatJavaScript()<cr>
+
+set number
+set rnu
+set colorcolumn=120
+highlight LineNr ctermbg=black
