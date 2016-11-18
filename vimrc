@@ -711,7 +711,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%04.8b]\ [HEX=\%0
   nmap :W :w
   nmap :Q :q
 " use <F6> to toggle line numbers
-  nmap <silent> <F6> :set number!<CR>
+"  nmap <silent> <F6> :set number!<CR>
 " page down with <Space>
   nmap <Space> <PageDown>
 "
@@ -1683,5 +1683,14 @@ setlocal wrap
 
 set number
 set rnu
-set colorcolumn=120
 highlight LineNr ctermbg=black
+
+set colorcolumn=120
+
+inoremap jj <Esc>
+
+" search highlight
+set hlsearch
+autocmd InsertEnter * :setlocal nohlsearch
+autocmd InsertLeave * :setlocal hlsearch
+hi Search cterm=NONE ctermfg=white ctermbg=236
