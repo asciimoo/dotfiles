@@ -175,6 +175,8 @@ autoload _set_parent_hist
 
 chpwd_functions=(${chpwd_functions[@]} "_set_parent_hist")
 
+_set_parent_hist
+
 MAIL=/home/a/.mail && export MAIL
 export GOROOT=$HOME/t/go
 export PATH=$PATH:$GOROOT/bin
