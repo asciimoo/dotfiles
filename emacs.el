@@ -13,10 +13,12 @@
     helm
     helm-projectile
 
+    markdown-mode
     molokai-theme
     relative-line-numbers
     smooth-scrolling
     spaceline-config
+    yaml-mode
     yasnippet
    )
 )
@@ -45,7 +47,9 @@
 (global-relative-line-numbers-mode)
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
-      inhibit-startup-message t)
+      inhibit-startup-message t
+      initial-scratch-message nil)
+(blink-cursor-mode 0)
 
 (smooth-scrolling-mode 1)
 (setq scroll-preserve-screen-position t)
@@ -55,11 +59,17 @@
 (setq-default tab-width 4 indent-tabs-mode nil)
 ;don't create backup files
 (setq make-backup-files nil)
+(setq backup-inhibited t)
 ;copy/paste
 (setq select-active-regions nil)
 (setq mouse-drag-copy-region t)
 (setq x-select-enable-primary t)
 (global-set-key [mouse-2] 'mouse-yank-at-click)
+;history
+(savehist-mode 1)
+(add-to-list 'savehist-additional-variables 'regexp-search-ring)
+;disable autosave
+(setq auto-save-default nil)
 
 ; KEY BINDINGS
 (global-set-key [f8] 'global-relative-line-numbers-mode)
@@ -84,9 +94,8 @@
 
 ; HELM
 (require 'helm-config)
-(setq helm-split-window-in-side-p           nil ; Open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-                                        ;      helm-echo-input-in-header-line        t
+(setq helm-split-window-in-side-p           nil
+      helm-move-to-line-cycle-in-source     t
       helm-display-header-line              nil
       helm-M-x-fuzzy-match                  t
       helm-buffers-fuzzy-matching           t
@@ -97,7 +106,7 @@
 (setq helm-autoresize-max-height 50)
 (setq helm-autoresize-min-height 20)
 (set-face-attribute 'helm-source-header nil :height 0.1)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x C-o") 'helm-find-files)
@@ -109,6 +118,10 @@
 ; GO-MODE
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+; YAML-MODE
+(add-hook 'yaml-mode-hook
+  '(lambda ()
+      (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (provide '.emacs)
 ;;; .emacs ends here
