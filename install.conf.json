@@ -11,6 +11,7 @@
     {
         "link": {
             "~/.tmux.conf": "tmux.conf",
+            "~/.emacs": "emacs.el",
             "~/.Xdefaults": "Xdefaults",
             "~/.xinitrc": "xinitrc",
             "~/.conkyrc": "conkyrc",
