@@ -141,6 +141,7 @@
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-directory "~/d/org")
 (setq org-agenda-files '("~/d/org"))
+(setq org-default-notes-file "~/d/org/notes.org")
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
 
 ;; MAGIT
