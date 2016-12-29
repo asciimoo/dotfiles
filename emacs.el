@@ -7,8 +7,11 @@
 
 (defvar required-packages
   '(
+    dired
     evil
+    magit
     molokai-theme
+    projectile
     relative-line-numbers
     smooth-scrolling
     spaceline-config
@@ -16,6 +19,7 @@
     ;; evil
     evil
     evil-leader
+    evil-magit
     evil-org
     ;; helm
     helm
@@ -42,7 +46,6 @@
 
 ;; UI
 (load-theme 'molokai t)
-(set-background-color "black")
 (set-face-foreground 'font-lock-comment-face "dark grey")
 (set-face-foreground 'font-lock-comment-delimiter-face "dark grey")
 (setq-default show-trailing-whitespace t)
@@ -78,6 +81,9 @@
 (add-to-list 'savehist-additional-variables 'regexp-search-ring)
 ;; disable autosave
 (setq auto-save-default nil)
+;; remap c-x to c-a too
+(keyboard-translate ?\C-a ?\C-x)
+(keyboard-translate ?\C-x ?\C-x)
 
 ;; KEY BINDINGS
 (global-set-key [f8] 'global-relative-line-numbers-mode)
@@ -87,10 +93,17 @@
 
 ;; EVIL MODE
 (evil-mode 1)
+(with-eval-after-load 'evil-maps
+  (define-key evil-motion-state-map (kbd "TAB") nil))
 (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(loop for (mode . state) in '((dired-mode . normal) ; can be normal, insert, emacs, etc..
+                              (org-agenda-mode . normal)
+                              (magit-diff-mode . normal)
+                              (magit-log-mode . normal))
+      do (evil-set-initial-state mode state))
 
 ;; FLYCHECK
 ;; (global-flycheck-mode)
@@ -127,9 +140,11 @@
 ;; ORG
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-directory "~/d/org")
-(setq org-agenda-files '("~/d/org/todo.org"
-                         "~/d/org/searx.org"))
+(setq org-agenda-files '("~/d/org"))
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
+;; MAGIT
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; GO-MODE
 (add-hook 'before-save-hook 'gofmt-before-save)
