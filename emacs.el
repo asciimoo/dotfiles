@@ -7,11 +7,12 @@
 
 (defvar required-packages
   '(
+    desktop
     dired
-    evil
     magit
     molokai-theme
     projectile
+    recentf
     relative-line-numbers
     smooth-scrolling
     spaceline-config
@@ -123,6 +124,7 @@
       helm-buffers-fuzzy-matching           t
       helm-completion-in-region-fuzzy-match t
       fit-window-to-buffer-horizontally     1
+      helm-ff-file-name-history-use-recentf t
       helm-recentf-fuzzy-match              t)
 
 (setq helm-autoresize-max-height 50)
@@ -138,11 +140,15 @@
 (helm-mode 1)
 
 ;; ORG
-(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-xa" 'org-agenda)
 (setq org-directory "~/d/org")
 (setq org-agenda-files '("~/d/org"))
 (setq org-default-notes-file "~/d/org/notes.org")
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+
+;; RECENTF
+(recentf-mode 1)
+(setq recentf-max-menu-items 512)
 
 ;; MAGIT
 (global-set-key (kbd "C-x g") 'magit-status)
