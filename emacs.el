@@ -114,6 +114,8 @@
 
 ;; FLYCHECK
 (global-flycheck-mode)
+(setq flycheck-check-syntax-automatically '(mode-enabled save))
+(setq flycheck-highlighting-mode 'lines)
 
 ;; SPACELINE
 (require 'spaceline-config)
