@@ -1,6 +1,12 @@
 ;;; .emacs --- CONFIG
+;;; Commentary:
+
+;;; Dependencies
 (require 'cl)
 (require 'package)
+
+;;; Code:
+
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
@@ -9,13 +15,14 @@
   '(
     desktop
     dired
+    flycheck
     magit
     molokai-theme
     projectile
     recentf
     relative-line-numbers
     smooth-scrolling
-    spaceline-config
+    spaceline
     yasnippet
     ;; evil
     evil
@@ -84,7 +91,6 @@
 (setq auto-save-default nil)
 ;; remap c-x to c-a too
 (keyboard-translate ?\C-a ?\C-x)
-(keyboard-translate ?\C-x ?\C-x)
 
 ;; KEY BINDINGS
 (global-set-key [f8] 'global-relative-line-numbers-mode)
@@ -107,9 +113,10 @@
       do (evil-set-initial-state mode state))
 
 ;; FLYCHECK
-;; (global-flycheck-mode)
+(global-flycheck-mode)
 
 ;; SPACELINE
+(require 'spaceline-config)
 (spaceline-spacemacs-theme)
 
 ;; YASNIPPET
@@ -117,7 +124,7 @@
 
 ;; HELM
 (require 'helm-config)
-(setq helm-split-window-in-side-p           nil
+(setq helm-split-window-in-side-p           t
       helm-move-to-line-cycle-in-source     t
       helm-display-header-line              nil
       helm-M-x-fuzzy-match                  t
@@ -127,15 +134,17 @@
       helm-ff-file-name-history-use-recentf t
       helm-recentf-fuzzy-match              t)
 
-(setq helm-autoresize-max-height 50)
-(setq helm-autoresize-min-height 20)
+
 (set-face-attribute 'helm-source-header nil :height 0.1)
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x C-o") 'helm-find-files)
 (global-set-key (kbd "C-x C-b") 'helm-mini)
-(helm-autoresize-mode 1)
+(global-set-key (kbd "C-x h") 'helm-command-prefix)
+;;(setq helm-autoresize-max-height 40)
+;;(setq helm-autoresize-min-height 40)
+;;(helm-autoresize-mode 0)
 (helm-projectile-on)
 (helm-mode 1)
 
@@ -162,4 +171,4 @@
       (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (provide '.emacs)
-;;; .emacs ends here
+;;; emacs.el ends here
