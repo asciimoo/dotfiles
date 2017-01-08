@@ -1,0 +1,45 @@
+axes.facecolor      : white    # axes background color
+axes.edgecolor      : CCCCCC   # axes edge color
+axes.linewidth      : 1.0      # edge linewidth
+axes.grid           : True     # display grid or not
+axes.titlesize      : x-large # fontsize of the axes title
+axes.labelsize      : large  # fontsize of the x any y labels
+axes.labelcolor     : 555555
+axes.axisbelow      : True     # whether axis gridlines and ticks are below
+
+figure.figsize   : 10, 7    # figure size in inches
+figure.facecolor : white    # figure facecolor; 0.75 is scalar gray
+figure.edgecolor : white   # figure edgecolor
+# figure.dpi : 300
+
+font.size           : 12.0
+
+grid.color       :   F4F4F4  # grid color
+grid.linestyle   :   -       # dotted
+grid.linewidth   :   1.5     # in points
+
+legend.fancybox      : True  # if True, use a rounded box for the
+legend.fontsize      : large
+
+patch.linewidth        : 0.5     # edge width in points
+patch.facecolor        : 348ABD # blue
+patch.edgecolor        : eeeeee
+patch.antialiased      : True    # render patches in antialised (no jaggies)
+
+text.color : 555555
+
+xtick.major.size     : 0      # major tick size in points
+xtick.minor.size     : 0      # minor tick size in points
+xtick.major.pad      : 6      # distance to major tick label in points
+xtick.minor.pad      : 6      # distance to the minor tick label in points
+xtick.color          : 555555      # color of the tick labels
+xtick.labelsize      : x-small # fontsize of the tick labels
+xtick.direction      : in     # direction: in or out
+
+ytick.major.size     : 0      # major tick size in points
+ytick.minor.size     : 0      # minor tick size in points
+ytick.major.pad      : 6      # distance to major tick label in points
+ytick.minor.pad      : 6      # distance to the minor tick label in points
+ytick.color          : 555555      # color of the tick labels
+ytick.labelsize      : small # fontsize of the tick labels
+ytick.direction      : in     # direction: in or out
