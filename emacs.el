@@ -14,7 +14,6 @@
 (defvar required-packages
   '(
     desktop
-    dired
     flycheck
     magit
     molokai-theme
