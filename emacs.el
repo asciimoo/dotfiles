@@ -31,7 +31,9 @@
     evil
     evil-leader
     evil-magit
+    evil-multiedit
     evil-org
+    evil-surround
     ;; helm
     helm
     helm-git-grep
@@ -110,6 +112,7 @@
 
 ;; EVIL MODE
 (evil-mode 1)
+(global-evil-surround-mode 1)
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "TAB") nil))
 (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
@@ -121,6 +124,18 @@
                               (magit-diff-mode . normal)
                               (magit-log-mode . normal))
       do (evil-set-initial-state mode state))
+
+(define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
+
+(define-key evil-normal-state-map (kbd "C-n") 'evil-multiedit-next)
+(define-key evil-normal-state-map (kbd "C-p") 'evil-multiedit-prev)
+(define-key evil-visual-state-map (kbd "C-n") 'evil-multiedit-next)
+(define-key evil-visual-state-map (kbd "C-p") 'evil-multiedit-prev)
+
+(define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+(define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+
+(evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
 
 ;; COMPANY
 (add-hook 'after-init-hook 'global-company-mode)
