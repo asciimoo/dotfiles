@@ -24,6 +24,9 @@
     smooth-scrolling
     spaceline
     yasnippet
+    ;; company
+    company
+    company-jedi
     ;; evil
     evil
     evil-leader
@@ -31,12 +34,15 @@
     evil-org
     ;; helm
     helm
+    helm-git-grep
     helm-projectile
     ;; org
     org
     ;; language specific packages
     go-mode
     markdown-mode
+    less-css-mode
+    php-mode
     yaml-mode
    )
 )
@@ -96,7 +102,11 @@
 (global-set-key [f8] 'global-relative-line-numbers-mode)
 (global-set-key [f9] 'toggle-menu-bar-mode-from-frame)
 
-;; PACKAGE SPECIFIC SETTINGS
+;; ELECTRIC-PAIR-MODE
+
+(electric-pair-mode)
+
+;;; PACKAGE SPECIFIC SETTINGS
 
 ;; EVIL MODE
 (evil-mode 1)
@@ -111,6 +121,14 @@
                               (magit-diff-mode . normal)
                               (magit-log-mode . normal))
       do (evil-set-initial-state mode state))
+
+;; COMPANY
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key "\t" 'company-complete-common)
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;; FLYCHECK
 (global-flycheck-mode)
@@ -162,10 +180,17 @@
 (setq recentf-max-menu-items 512)
 
 ;; MAGIT
-(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x C-g") 'magit-status)
 
 ;; GO-MODE
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+;; PYTHON-MODE
+;(define-key global-map (kbd "RET") 'newline-and-indent)
+
+;; PHP-MODE
+(add-to-list 'auto-mode-alist
+             '("\\.php[34567]?\\'\\|\\.phtml\\'" . php-mode))
 
 ;; YAML-MODE
 (add-hook 'yaml-mode-hook
@@ -174,3 +199,4 @@
 
 (provide '.emacs)
 ;;; emacs.el ends here
+
