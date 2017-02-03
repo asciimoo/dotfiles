@@ -13,10 +13,10 @@
 
 (defvar required-packages
   '(
+    color-theme-sanityinc-tomorrow
     desktop
     flycheck
     magit
-    molokai-theme
     projectile
     recentf
     relative-line-numbers
@@ -43,7 +43,7 @@
     go-mode
     markdown-mode
     less-css-mode
-    php-mode
+    ;php-mode
     yaml-mode
    )
 )
@@ -60,9 +60,10 @@
   do (require p))
 
 ;; UI
-(load-theme 'molokai t)
+(load-theme 'sanityinc-tomorrow-night t)
 (set-face-foreground 'font-lock-comment-face "dark grey")
 (set-face-foreground 'font-lock-comment-delimiter-face "dark grey")
+
 (setq-default show-trailing-whitespace t)
 (set-face-attribute 'default nil :height 80)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -203,8 +204,8 @@
 ;(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; PHP-MODE
-(add-to-list 'auto-mode-alist
-             '("\\.php[34567]?\\'\\|\\.phtml\\'" . php-mode))
+; (add-to-list 'auto-mode-alist
+;              '("\\.php[34567]?\\'\\|\\.phtml\\'" . php-mode))
 
 ;; YAML-MODE
 (add-hook 'yaml-mode-hook
@@ -213,4 +214,3 @@
 
 (provide '.emacs)
 ;;; emacs.el ends here
-
