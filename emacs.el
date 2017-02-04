@@ -13,10 +13,10 @@
 
 (defvar required-packages
   '(
-    color-theme-sanityinc-tomorrow
     desktop
     flycheck
     magit
+    molokai-theme
     projectile
     recentf
     relative-line-numbers
@@ -60,7 +60,7 @@
   do (require p))
 
 ;; UI
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'molokai t)
 (set-face-foreground 'font-lock-comment-face "dark grey")
 (set-face-foreground 'font-lock-comment-delimiter-face "dark grey")
 
