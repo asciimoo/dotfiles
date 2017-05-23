@@ -22,6 +22,7 @@
     relative-line-numbers
     smooth-scrolling
     spaceline
+    sr-speedbar
     yasnippet
     ;; company
     company
@@ -33,10 +34,11 @@
     evil-multiedit
     evil-org
     evil-surround
-    ;; helm
-    helm
-    helm-git-grep
-    helm-projectile
+    ;; ivy
+    ivy
+    counsel
+    counsel-projectile
+    smex
     ;; org
     org
     ;; language specific packages
@@ -90,7 +92,7 @@
 ;; copy/paste
 (setq select-active-regions nil)
 (setq mouse-drag-copy-region t)
-(setq x-select-enable-primary t)
+(setq select-enable-primary t)
 (global-set-key [mouse-2] 'mouse-yank-at-click)
 ;; history
 (savehist-mode 1)
@@ -115,10 +117,10 @@
 (global-evil-surround-mode 1)
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "TAB") nil))
-(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(global-set-key (kbd "C-h") 'evil-window-left)
+(global-set-key (kbd "C-j") 'evil-window-down)
+(global-set-key (kbd "C-k") 'evil-window-up)
+(global-set-key (kbd "C-l") 'evil-window-right)
 (loop for (mode . state) in '((dired-mode . normal) ; can be normal, insert, emacs, etc..
                               (org-agenda-mode . normal)
                               (magit-diff-mode . normal)
@@ -157,31 +159,20 @@
 ;; YASNIPPET
 (yas-global-mode 1)
 
-;; HELM
-(require 'helm-config)
-(setq helm-split-window-in-side-p           t
-      helm-move-to-line-cycle-in-source     t
-      helm-display-header-line              nil
-      helm-M-x-fuzzy-match                  t
-      helm-buffers-fuzzy-matching           t
-      helm-completion-in-region-fuzzy-match t
-      fit-window-to-buffer-horizontally     1
-      helm-ff-file-name-history-use-recentf t
-      helm-recentf-fuzzy-match              t)
-
-
-(set-face-attribute 'helm-source-header nil :height 0.1)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-projectile-find-file)
-(global-set-key (kbd "C-x C-o") 'helm-find-files)
-(global-set-key (kbd "C-x C-b") 'helm-mini)
-(global-set-key (kbd "C-x h") 'helm-command-prefix)
-;;(setq helm-autoresize-max-height 40)
-;;(setq helm-autoresize-min-height 40)
-;;(helm-autoresize-mode 0)
-(helm-projectile-on)
-(helm-mode 1)
+;; IVY
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-height 30)
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-ignore-order)))
+;(setq ivy-re-builders-alist
+;      '((ivy-switch-buffer . ivy--regex-plus)
+;        (t . ivy--regex-fuzzy)))
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-s") 'counsel-grep-or-swiper)
+(global-set-key (kbd "C-x C-f") 'counsel-projectile-find-file)
+(global-set-key (kbd "C-x C-o") 'counsel-find-file)
+(global-set-key (kbd "C-x C-b") 'counsel-recentf)
 
 ;; ORG
 (global-set-key "\C-xa" 'org-agenda)
@@ -193,9 +184,28 @@
 ;; RECENTF
 (recentf-mode 1)
 (setq recentf-max-menu-items 512)
+(setq recentf-auto-cleanup 'never)
 
 ;; MAGIT
 (global-set-key (kbd "C-x C-g") 'magit-status)
+
+;; SPEEDBAR
+(global-set-key (kbd "<f3>") 'sr-speedbar-toggle)
+(setq speedbar-frame-parameters
+      '((minibuffer)
+	(width . 40)
+	(border-width . 0)
+	(menu-bar-lines . 0)
+	(tool-bar-lines . 0)
+	(unsplittable . t)
+	(left-fringe . 0)))
+(setq speedbar-hide-button-brackets-flag t)
+(setq speedbar-show-unknown-files t)
+(setq speedbar-smart-directory-expand-flag t)
+(setq speedbar-use-images nil)
+(setq sr-speedbar-auto-refresh t)
+(setq sr-speedbar-max-width 70)
+(setq sr-speedbar-width-console 40)
 
 ;; GO-MODE
 (add-hook 'before-save-hook 'gofmt-before-save)
@@ -210,7 +220,7 @@
 ;; YAML-MODE
 (add-hook 'yaml-mode-hook
   '(lambda ()
-      (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+     (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (provide '.emacs)
 ;;; emacs.el ends here
