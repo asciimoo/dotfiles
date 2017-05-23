@@ -16,8 +16,12 @@ URxvt.perl-ext-common:  default,matcher,font-size
 URxvt.urlLauncher:      /home/a/bin/br luakit
 URxvt.transparent:      true
 black.transparent:      false
-black.font:     xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=normal
-black.boldFont: xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=bold
+black.foreground:     #DDDDDD
+black.background:     #111111
+#black.font:     xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=normal
+#black.boldFont: xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=bold
+black.font:   -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+black.boldFont:   -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
 URxvt.shading:          20
 *borderless:            1
 
@@ -32,8 +36,8 @@ URxvt*color8  : #555753
 URxvt*color1  : #CC0000
 URxvt*color9  : #FF1919
 ! green
-URxvt*color2  : #4E9A06
-URxvt*color10 : #8AE234
+URxvt*color2  : #4EBA06
+URxvt*color10 : #8AF234
 ! yellow
 URxvt*color3  : #C4A000
 URxvt*color11 : #FCE94F
@@ -68,3 +72,10 @@ URxvt.keysym.C-S-Up:   perl:font-size:incglobal
 URxvt.keysym.C-S-Down: perl:font-size:decglobal
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+
+#URxvt.font:     xft:bitstream vera sans mono:size=9:antialias=true
+#URxvt.boldFont: xft:bitstream vera sans mono:bold:size=9:antialias=true
+
+# ! -- Fonts -- !
+#URxvt.font:xft:Monospace:pixelsize=11
+#URxvt.boldFont: xft:bitstream vera sans mono:bold:size=11:antialias=true
