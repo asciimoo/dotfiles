@@ -157,9 +157,7 @@ bindcode Mod4+Shift+26 exit
 # Mod4+q restarts i3 inplace
 bindcode Mod4+24 restart
 
-# F9 -> screen lock
-#bindsym F9 exec i3lock -d
-#bindsym F8 exec xset dpms force off
+bindsym Print exec xset dpms force off
 
 
 bindsym Mod4+o exec xbacklight -dec 1
