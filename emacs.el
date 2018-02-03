@@ -1,4 +1,4 @@
-;;; .emacs --- CONFIG
+;;; .EMACS --- CONFIG
 ;;; Commentary:
 
 ;;; Dependencies
@@ -14,18 +14,20 @@
 (defvar required-packages
   '(
     desktop
-    flycheck
+    ggtags
+    linum-relative
     magit
     molokai-theme
     projectile
     recentf
-    relative-line-numbers
+    semantic
     smooth-scrolling
     spaceline
     sr-speedbar
     yasnippet
     ;; company
     company
+    company-php
     company-jedi
     ;; evil
     evil
@@ -45,7 +47,7 @@
     go-mode
     markdown-mode
     less-css-mode
-    ;php-mode
+    php-mode
     yaml-mode
    )
 )
@@ -73,7 +75,8 @@
 (menu-bar-mode 0)
 (show-paren-mode t)
 (scroll-bar-mode -1)
-(global-relative-line-numbers-mode)
+(linum-on)
+(global-linum-mode)
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
       inhibit-startup-message t
@@ -103,7 +106,7 @@
 (keyboard-translate ?\C-a ?\C-x)
 
 ;; KEY BINDINGS
-(global-set-key [f8] 'global-relative-line-numbers-mode)
+(global-set-key [f8] 'linum-relative-toggle)
 (global-set-key [f9] 'toggle-menu-bar-mode-from-frame)
 
 ;; ELECTRIC-PAIR-MODE
@@ -148,13 +151,18 @@
 (add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;; FLYCHECK
-(global-flycheck-mode)
-(setq flycheck-check-syntax-automatically '(mode-enabled save))
-(setq flycheck-highlighting-mode 'lines)
+;(global-flycheck-mode)
+;(setq flycheck-check-syntax-automatically '(mode-enabled save))
+;(setq flycheck-highlighting-mode 'lines)
 
 ;; SPACELINE
 (require 'spaceline-config)
 (spaceline-spacemacs-theme)
+
+;; SEMANTIC
+
+(global-semantic-idle-summary-mode 1)
+(global-semantic-stickyfunc-mode 1)
 
 ;; YASNIPPET
 (yas-global-mode 1)
@@ -217,10 +225,30 @@
 ; (add-to-list 'auto-mode-alist
 ;              '("\\.php[34567]?\\'\\|\\.phtml\\'" . php-mode))
 
+
+;; C-MODE
+
+(setq-default c-basic-offset 4
+                tab-width 4
+                indent-tabs-mode nil)
+
 ;; YAML-MODE
 (add-hook 'yaml-mode-hook
   '(lambda ()
      (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 (provide '.emacs)
-;;; emacs.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode ggtags evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
