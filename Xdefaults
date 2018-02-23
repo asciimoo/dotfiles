@@ -18,10 +18,12 @@ URxvt.transparent:      true
 black.transparent:      false
 black.foreground:     #DDDDDD
 black.background:     #111111
-#black.font:     xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=normal
-#black.boldFont: xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=bold
-black.font:   -*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
-black.boldFont:   -*-terminus-bold-*-*-*-14-*-*-*-*-*-*-*
+black.font:     xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=normal
+black.boldFont: xft:DejaVu Sans Mono:size=10:antialias=true:hinting=true:style=bold
+#black.font:     xft:Terminus:size=10:antialias=true:hinting=true:style=normal
+#black.boldFont: xft:Terminus:size=10:antialias=true:hinting=true:style=bold
+#black.font:   -*-terminus-medium-*-*-*-18-*-*-*-*-*-*-*
+#black.boldFont:   -*-terminus-bold-*-*-*-18-*-*-*-*-*-*-*
 URxvt.shading:          20
 *borderless:            1
 
@@ -79,3 +81,4 @@ URxvt.iso14755_52: false
 # ! -- Fonts -- !
 #URxvt.font:xft:Monospace:pixelsize=11
 #URxvt.boldFont: xft:bitstream vera sans mono:bold:size=11:antialias=true
+#URxvt.termName: xterm-256color
