@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/sh
 for file in "$@" ; do
     echo '-================================-'
     echo $file

@@ -1,2 +1,2 @@
-#!/bin/ksh
-tail --retry --quiet --follow=name -n 40 /var/log/syslog /var/log/nginx/access.log | grep --line-buffered -vf /home/a/.logfilterrc
+#!/bin/sh
+/usr/bin/tail -f --follow=name --retry -n 40 /var/log/syslog | /bin/grep --line-buffered -vf /home/a/.logfilterrc

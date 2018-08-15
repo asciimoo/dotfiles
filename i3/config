@@ -134,7 +134,7 @@ mode "resize" {
 bindcode Mod4+27 mode "resize"
 
 # Mod4+Enter starts a new terminal
-bindcode Mod4+36 exec /usr/bin/urxvtc
+bindcode Mod4+36 exec urxvtc
 
 
 # Mod4+Enter starts screensaver
@@ -171,7 +171,7 @@ ipc-socket ~/.i3/ipc.sock
 #exec i3status | i3bar -d
 #exec i3status | i3bar -d -m
 bar {
-    output            LVDS1
+    output            LVDS-1
     status_command    i3status
     position          bottom
     mode              hide

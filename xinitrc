@@ -11,7 +11,9 @@ synclient HorizTwoFingerScroll=1
 #eval `ssh-agent`
 setxkbmap -layout us -option "ctrl:swapcaps" -option "altwin:super_win"
 setxkbmap -option grp:switch,grp:rctrl_switch,grp_led:scroll us,hu
-feh --bg-scale --no-fehbg /home/a/i/bg/gray-robot-pattern.png
+#feh --bg-scale --no-fehbg /home/a/i/bg/gray-robot-pattern.png
+#feh --bg-scale --no-fehbg  _1287534334.jpg
+feh --bg-scale --no-fehbg /home/a/i/bg/wood.jpg
 #xhost +si:localuser:b
 #xcompmgr -c -f -F -o 0.5&
 #wmii

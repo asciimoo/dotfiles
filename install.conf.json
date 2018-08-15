@@ -29,7 +29,8 @@
             "~/bin/gitlog": "bin/gitlog",
             "~/bin/clock": "bin/clock",
             "~/bin/mp42mp3": "bin/mp42mp3",
-            "~/bin/pip-upgrade": "bin/pip-upgrade"
+            "~/bin/pip-upgrade": "bin/pip-upgrade",
+            "~/bin/screensaver": "bin/screensaver"
         }
     },
     {

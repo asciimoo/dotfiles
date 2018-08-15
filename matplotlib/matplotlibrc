@@ -6,6 +6,8 @@ axes.titlesize      : x-large # fontsize of the axes title
 axes.labelsize      : large  # fontsize of the x any y labels
 axes.labelcolor     : 555555
 axes.axisbelow      : True     # whether axis gridlines and ticks are below
+backend      : GtkAgg
+
 
 figure.figsize   : 10, 7    # figure size in inches
 figure.facecolor : white    # figure facecolor; 0.75 is scalar gray

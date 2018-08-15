@@ -1,16 +1,16 @@
 set defsearch=searx
 
-" show URLs of links (on hover or other focus) in command line
-set showstatuslinks='command'
-
-" show highlights when searching
-set hlfind
-
-" search incrementally
-set incfind
-
-" ignore case in searches unless caps are entered in search term
-set findcase=smart
+"" show URLs of links (on hover or other focus) in command line
+"set showstatuslinks='command'
+"
+"" show highlights when searching
+"set hlfind
+"
+"" search incrementally
+"set incfind
+"
+"" ignore case in searches unless caps are entered in search term
+"set findcase=smart
 
 " jump to previous and next tabs - matches LH for history movement
 map l gt
