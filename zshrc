@@ -1,5 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+EDITOR=vim
+export EDITOR
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -178,7 +180,7 @@ chpwd_functions=(${chpwd_functions[@]} "_set_parent_hist")
 _set_parent_hist
 
 MAIL=/home/a/.mail && export MAIL
-export GOROOT=$HOME/t/go
-export PATH=$PATH:$GOROOT/bin
+#export GOROOT=$HOME/t/go
+#export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/w
 source "$HOME/w/ali/ali.sh"

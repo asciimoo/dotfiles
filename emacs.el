@@ -1,11 +1,11 @@
-;;; .EMACS --- CONFIG
-;;; Commentary:
+;;; .emacs --- config
+;;; commentary:
 
-;;; Dependencies
+;;; dependencies
 (require 'cl)
 (require 'package)
 
-;;; Code:
+;;; code:
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -14,9 +14,9 @@
 (defvar required-packages
   '(
     desktop
-    ggtags
     linum-relative
     magit
+    ggtags
     molokai-theme
     projectile
     recentf
@@ -25,10 +25,11 @@
     spaceline
     sr-speedbar
     yasnippet
+    undo-tree
     ;; company
-    company
-    company-php
-    company-jedi
+    ;company
+    ;company-php
+    ;;company-jedi
     ;; evil
     evil
     evil-leader
@@ -43,12 +44,15 @@
     smex
     ;; org
     org
+    org-bullets
     ;; language specific packages
     go-mode
+    go-guru
     markdown-mode
     less-css-mode
     php-mode
     yaml-mode
+    web-mode
    )
 )
 
@@ -59,6 +63,13 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+(defun update-packages ()
+  (interactive)
+  (progn
+    (package-refresh-contents)
+    (package-menu-mark-upgrades)
+    (package-menu-execute)))
+
 ;; load required packages
 (loop for p in required-packages
   do (require p))
@@ -67,9 +78,11 @@
 (load-theme 'molokai t)
 (set-face-foreground 'font-lock-comment-face "dark grey")
 (set-face-foreground 'font-lock-comment-delimiter-face "dark grey")
+(set-background-color "#111111")
+
 
 (setq-default show-trailing-whitespace t)
-(set-face-attribute 'default nil :height 80)
+(set-face-attribute 'default nil :height 90)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -87,6 +100,8 @@
 (setq scroll-preserve-screen-position t)
 
 ;; CUSTOMISATIONS
+;; undo
+(global-undo-tree-mode t)
 ;; use 4 spaces instead of tabs
 (setq-default tab-width 4 indent-tabs-mode nil)
 ;; don't create backup files
@@ -118,6 +133,8 @@
 ;; EVIL MODE
 (evil-mode 1)
 (global-evil-surround-mode 1)
+(evil-set-undo-system 'undo-tree)
+
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "TAB") nil))
 (global-set-key (kbd "C-h") 'evil-window-left)
@@ -143,12 +160,12 @@
 (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
 
 ;; COMPANY
-(add-hook 'after-init-hook 'global-company-mode)
-(global-set-key "\t" 'company-complete-common)
-(defun my/python-mode-hook ()
-  (add-to-list 'company-backends 'company-jedi))
-
-(add-hook 'python-mode-hook 'my/python-mode-hook)
+;(add-hook 'after-init-hook 'global-company-mode)
+;(global-set-key "\t" 'company-complete-common)
+;(defun my/python-mode-hook ()
+;  (add-to-list 'company-backends 'company-jedi))
+;
+;(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;; FLYCHECK
 ;(global-flycheck-mode)
@@ -181,13 +198,49 @@
 (global-set-key (kbd "C-x C-f") 'counsel-projectile-find-file)
 (global-set-key (kbd "C-x C-o") 'counsel-find-file)
 (global-set-key (kbd "C-x C-b") 'counsel-recentf)
+(define-key ivy-minibuffer-map (kbd "TAB") 'ivy-partial)
+(define-key ivy-minibuffer-map (kbd "C-j") #'ivy-next-line-or-history)
+(define-key ivy-minibuffer-map (kbd "C-k") #'ivy-previous-line-or-history)
+
+
 
 ;; ORG
 (global-set-key "\C-xa" 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (setq org-directory "~/d/org")
 (setq org-agenda-files '("~/d/org"))
+(setq org-agenda-start-with-follow-mode t)
 (setq org-default-notes-file "~/d/org/notes.org")
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")))
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq org-capture-templates '(("t" "Todo [inbox]" entry
+                               (file+headline "~/d/org/tasks.org" "Tasks")
+                               "* TODO %i%?")
+                              ("a" "Agenda" entry
+                               (file+headline "~/d/org/agenda.org" "Agenda")
+                               "* TODO %i%? \n %U")))
+(let* ((variable-tuple
+          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+                ((x-list-fonts "Verdana")         '(:font "Verdana"))
+                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+         (base-font-color     (face-foreground 'default nil 'default))
+         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+
+    (custom-theme-set-faces
+     'user
+     `(org-level-8 ((t (,@headline ,@variable-tuple))))
+     `(org-level-7 ((t (,@headline ,@variable-tuple))))
+     `(org-level-6 ((t (,@headline ,@variable-tuple))))
+     `(org-level-5 ((t (,@headline ,@variable-tuple))))
+     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
 
 ;; RECENTF
 (recentf-mode 1)
@@ -215,16 +268,63 @@
 (setq sr-speedbar-max-width 70)
 (setq sr-speedbar-width-console 40)
 
-;; GO-MODE
+;; GO-MODE - GOLANG
 (add-hook 'before-save-hook 'gofmt-before-save)
+(add-to-list 'auto-mode-alist (cons "\\.go\\'" 'go-mode))
+(add-hook 'go-mode-hook
+                    (lambda () (local-set-key (kbd "C-0") #'run-latexmk)))
+; jump to definition
+;(local-set-key (kbd "C-x j") 'godef-jump)
+(defun my-go-electric-brace ()
+  "Insert an opening brace may be with the closing one.
+If there is a space before the brace also adds new line with
+properly indented closing brace and moves cursor to another line
+inserted between the braces between the braces."
+  (interactive)
+  (insert "{")
+  (when (looking-back " {")
+    (newline)
+    (indent-according-to-mode)
+    (save-excursion
+      (newline)
+      (insert "}")
+      (indent-according-to-mode))))
+
+(defun my-godoc-package ()
+  "Display godoc for given package (with completion)."
+  (interactive)
+  (godoc (ivy-read "Package: " (go-packages) :require-match t)))
+
+;(use-package go-guru
+;  :after go-mode)
+;
+;(use-package go-mode
+;  :init
+;  ;(setq go-fontify-function-calls nil)  ; fontifing names of called
+;  ;                                      ; functions is too much for me
+;  :bind
+;  (:map go-mode-map
+;        ("C-x C-d" . godoc)
+;        ("C-x C-p" . my-godoc-package)
+;        ("{" . my-go-electric-brace)))
+;
+(eval-after-load 'go-mode
+  '(progn
+     (local-set-key (kbd "C-x j") 'godef-jump)
+     (local-set-key (kbd "C-x d") 'my-godoc-package)
+     (local-set-key (kbd "{") 'my-go-electric-brace)
+   )
+)
+
+(eval-after-load 'speedbar
+  '(speedbar-add-supported-extension ".go"))
 
 ;; PYTHON-MODE
 ;(define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; PHP-MODE
-; (add-to-list 'auto-mode-alist
-;              '("\\.php[34567]?\\'\\|\\.phtml\\'" . php-mode))
+;; WEB-MODE
 
+(add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
 
 ;; C-MODE
 
@@ -237,6 +337,14 @@
   '(lambda ()
      (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
+;; SCLANG MODE
+
+(when (file-directory-p "~/m/music/supercollider/editors/scel/")
+  (progn
+    (add-to-list 'load-path "~/m/music/supercollider/editors/scel/el")
+    (require 'sclang)
+  ))
+
 (provide '.emacs)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -244,11 +352,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode ggtags evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))))
+   '(org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-document-title ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 2.0 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.75))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.5))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.25))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.1))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif")))))

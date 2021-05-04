@@ -1,174 +1,124 @@
-# Conky sample configuration
+--[[
+#=====================================================================================
 #
-# the list of variables has been removed from this file in favour
-# of keeping the documentation more maintainable.
-# Check http://conky.sf.net for an up-to-date-list.
+]]
 
-# set to yes if you want Conky to be forked in the background
-background no
+conky.config = {
+--##  Begin Window Settings  #####################
+own_window = true,
+own_window_type = 'dock',
+own_window_transparent = true,
+own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
+own_window_colour = '#000000',
+own_window_class = 'Conky',
+own_window_title = 'Conky',
+--## ARGB can be used for real transparency
+--## NOTE that a composite manager is required for real transparency.
+--## This option will not work as desired (in most cases) in conjunction with
+-- own_window_argb_visual yes # Options: yes or no
 
-# X font when Xft is disabled, you can pick one with program xfontsel
-#font 5x7
-#font 6x10
-#font 7x13
-#font 8x13
-#font 9x15
-#font *mintsmild.se*
-#font -*-*-*-*-*-*-34-*-*-*-*-*-*-*
+--## When ARGB visuals are enabled, this use this to modify the alpha value
+--## Use: own_window_type normal
+--## Use: own_window_transparent no
+--## Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
+-- own_window_argb_value 50
+
+minimum_width = 1980,
+minimum_height = 20,
+alignment = top_left,
+
+gap_x = 0,--## left | right
+gap_y = 0,--## up | down
+--######################  End Window Settings  ###
+--##  Font Settings  #############################
+-- Use Xft (anti-aliased font and stuff)
+use_xft = true,
+font = 'Noto Sans:Regular:size=9',
 
 
-# Use Xft?
-use_xft yes
+-- Alpha of Xft font. Must be a value at or between 1 and 0 ###
+xftalpha = 1,
+-- Force UTF8? requires XFT ###
+override_utf8_locale = true,
 
-# Xft font when Xft is enabled
-xftfont Bitstream Vera Sans Mono:size=7
+uppercase = false,
+--########################  End Font Settings  ###
+--##  Colour Settings  ###########################
+draw_shades = false,--yes
+default_shade_color = 'black',
 
-# Text alpha when using Xft
-xftalpha 0.6
+draw_outline = false,-- amplifies text if yes
+default_outline_color = 'black',
 
-# Print everything to stdout?
-out_to_console no
-# out_to_x no
+default_color = '#d8dee8',-- White
+color1 = '#bf616a',-- Red
+color2 = '#a3be8c',-- Green
+color3 = '#ebcb8b',-- Yellow
+color4 = '#81a1c1',-- Blue
+--######################  End Colour Settings  ###
+--##  Borders Section  ###########################
+draw_borders = yes,
+draw_outline = no,
+draw_shades = no,
+-- Stippled borders?
+stippled_borders = 0,
+-- border margins
+border_inner_margin = 0,
+border_outer_margin = 0,
+-- border width
+border_width = 1,
+use_spacer = left,
+pad_percents = 2,
+-- graph borders
+draw_graph_borders = true,--no
+--default_graph_size 15 40
+--#######################  End Borders Secton  ###
+--##  Miscellaneous Section  #####################
+-- Boolean value, if true, Conky will be forked to background when started.
+background = false,
+-- Adds spaces around certain objects to stop them from moving other things
+-- around, this only helps if you are using a mono font
+-- Options: right, left or none
 
-# MPD host/port
-# mpd_host localhost
-# mpd_port 6600
-# mpd_password tinker_bell
+-- Default and Minimum size is 256 - needs more for single commands that
+-- "call" a lot of text IE: bash scripts
+--text_buffer_size 6144
 
-# Print everything to console?
-# out_to_console no
+-- Subtract (file system) buffers from used memory?
+no_buffers = true,
 
-# mail spool
-mail_spool $MAIL
+-- change GiB to G and MiB to M
+short_units = true,
 
-# Update interval in seconds
-update_interval 0.9
+-- Like it says, ot pads the decimals on % values
+-- doesn't seem to work since v1.7.1
 
-# This is the number of times Conky will update before quitting.
-# Set to zero to run forever.
-total_run_times 0
+-- Imlib2 image cache size, in bytes. Default 4MiB Increase this value if you use
+-- $image lots. Set to 0 to disable the image cache.
+--imlib_cache_size = 0,
 
-# Create own window instead of using desktop (required in nautilus)
-own_window yes
+-- Use the Xdbe extension? (eliminates flicker)
+-- It is highly recommended to use own window with this one
+-- so double buffer won't be so big.
+double_buffer = true,
 
-# If own_window is yes, you may use type normal, desktop or override
-own_window_type dock
+--   Maximum size of user text buffer, i.e. layout below TEXT line in config file
+--  (default is 16384 bytes)
+-- max_user_text 16384
 
-# Use pseudo transparency with own_window?
-own_window_transparent yes
+-- Desired output unit of all objects displaying a temperature. Parameters are
+-- either "fahrenheit" or "celsius". The default unit is degree Celsius.
+-- temperature_unit Fahrenheit
+--################  End Miscellaneous Section  ###
 
-# If own_window_transparent is set to no, you can set the background colour here
-# own_window_colour 0f0f0f
+update_interval = 1,
 
-# If own_window is yes, these window manager hints may be used
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+};
 
-# Use double buffering (reduces flicker, may not work for everyone)
-double_buffer yes
-
-# Minimum size of text area
-#minimum_size 1024 5
-minimum_size 1440 8
-
-# Draw shades?
-draw_shades yes
-
-default_shade_color white
-
-# Draw outlines?
-draw_outline yes
-
-# Draw borders around text
-draw_borders no
-
-# Draw borders around graphs
-draw_graph_borders yes
-
-# Stippled borders?
-stippled_borders 8
-
-# border margins
-# border_margin 1
-
-# border width
-border_width 1
-
-# Default colors and also border colors
-default_color white
-default_shade_color black
-default_outline_color black
-
-# Text alignment, other possible values are commented
-#alignment top_left
-#alignment top_right
-#alignment bottom_left
-alignment top_left
-#alignment none
-
-# Gap between borders of screen and text
-# same thing as passing -x at command line
-gap_x 0
-# gap_y 4
-gap_y 2
-
-# Subtract file system buffers from used memory?
-no_buffers yes
-
-# set to yes if you want all text to be in uppercase
-uppercase no
-
-# number of cpu samples to average
-# set to 1 to disable averaging
-cpu_avg_samples 2
-
-# number of net samples to average
-# set to 1 to disable averaging
-net_avg_samples 2
-
-# Force UTF8? note that UTF8 support required XFT
-override_utf8_locale no
-
-# Add spaces to keep things from moving about?  This only affects certain objects.
-use_spacer none
-
-# Maximum size of buffer for user text, i.e. below TEXT line.
-#max_user_text 16384
-
-# Allow for the creation of at least this number of port monitors (if 0 or not set, default is 16) 
-#min_port_monitors 16
-
-# Allow each port monitor to track at least this many connections (if 0 or not set, default is 256)
-#min_port_monitor_connections 256
-
-# variable is given either in format $variable or in ${variable}. Latter
-# allows characters right after the variable and must be used in network
-# stuff because of an argument
-
-# stuff after 'TEXT' will be formatted on screen
-
-#${color lightgrey}Processes:$color $processes  ${color grey}Running:$color $running_processes
-#${color}Name              PID     CPU%   MEM%
-#${color #ddaa00} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
-#${color lightgrey} ${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
-#${color lightgrey} ${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
-#${color lightgrey} ${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4}
-#${color}Mem usage
-#${color #ddaa00} ${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
-#${color lightgrey} ${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
-#${color lightgrey} ${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
-#${color #ddaa00}Outbound Connection ${alignr} Remote Service/Port$color
-# ${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
-# ${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
-# ${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
-# ${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
-# ${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
-# ${tcp_portmon 32768 61000 rhost 5} ${alignr} ${tcp_portmon 32768 61000 rservice 5}
-#${color}${exec /home/stef/bin/log}
-
-# we need a volume setting device
-TEXT
-${color #FF3366}[C:${color #FF0066}${cpu cpu0}% ${color #33FF66}${cpugraph cpu0 8,40} ${freq 0} MHz][${acpitemp}C]${color #FF3366}[M:$mem S:$swap ]${color #33FF66}[DIO ${diskiograph 8,40} ${diskio} ${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
-${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0 8,40} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 8,40 } ] ${endif}\
-${if_up ppp0}[${color #FF3366}ppp0:${color #33FF66}D ${downspeed ppp0} k/s ${color #FF3366}${downspeedgraph ppp0 8,40} ${color #FF3366}U:${color #FF3366} ${upspeed ppp0} k/ ${color #FF3366}${upspeedgraph ppp0 8,40 }] ${endif}\
-${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0 8,40} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0 8,40} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 8,40 wlan0}${endif}\
-${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 8,40} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 8,40} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 8,40 wlan2}${endif} | ${battery_percent}(${battery_time}) | [${execi 1800 '/home/a/bin/isHack'}]
+conky.text = [[
+${color #FF3366}[C:${color #FF0066}${cpu cpu0}% ${color #33FF66}${cpugraph cpu0 10,50} ${freq 0} MHz][${acpitemp}C]${color #FF3366}[M:$mem S:$swap ]${color #33FF66}[DIO ${diskiograph 10,50} ${diskio} ${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
+${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 10,50 } ] ${endif}\
+${if_up ppp0}[${color #FF3366}ppp0:${color #33FF66}D ${downspeed ppp0} k/s ${color #FF3366}${downspeedgraph ppp0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed ppp0} k/ ${color #FF3366}${upspeedgraph ppp0 10,50 }] ${endif}\
+${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0 10,50} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 10,50 wlan0}${endif}\
+${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 10,50} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 10,50 wlan2}${endif} | ${battery_percent}(${battery_time}) | [${execi 1800 '/home/a/bin/isHack'}]
+]];

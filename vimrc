@@ -1380,7 +1380,7 @@ au! BufNewFile mutt* let @"="X-Editor: Vim-".version." http://www.vim.org\n"|exe
     " let mysyntaxfile="~guckes/.P/vim/syntax/syntax.vim"
     " URL: http://www.math.fu-berlin.de/~guckes/vim/syntax/syntax.vim
     " The main/standard syntax file:
-      so /usr/share/vim/vim80/syntax/syntax.vim
+      so /usr/share/vim/vim82/syntax/syntax.vim
     "
     " Use my own syntax file on "mail/news messages":
       let aucommand = "au BufNewFile,BufRead ".MAILNEWSFILES
@@ -1688,6 +1688,24 @@ highlight LineNr ctermbg=black
 set colorcolumn=120
 
 inoremap jj <Esc>
+
+
+function! GetVisualSelection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ['']
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return lines
+    return join(lines, "\n")
+endfunction
+nnoremap <silent> <C-q> :call writefile([getline(".")], "/tmp/foxdot.fifo", "a")<CR>
+inoremap <silent> <C-q> <ESC>:call writefile([getline(".")], "/tmp/foxdot.fifo", "a")<CR>a
+vnoremap <silent> <C-q> :<c-u>call writefile(GetVisualSelection(), "/tmp/foxdot.fifo", "a")<CR>
 
 " search highlight
 set hlsearch

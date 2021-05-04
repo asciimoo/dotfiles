@@ -4,11 +4,13 @@ Xft.hinting:    full
 Xft.hintstyle:  hintslight
 
 *.font:     -*-fixed-*-*-*-*-10-*-*-*-*-*-*-*
-*.boldFont:     -*-fixed-*-*-*-*-10-*-*-*-*-*-*-*
+*.boldFont: -*-fixed-*-*-*-*-10-*-*-*-*-*-*-*
+#*.font:     xft:DejaVu Sans Mono:size=9:antialias=false:hinting=true:style=normal
+#*.boldFont: xft:DejaVu Sans Mono:size=9:antialias=false:hinting=true:style=bold
 #*.font:     xft:DejaVu Sans Mono:size=20:antialias=false:hinting=true:style=normal
+#*.boldFont: xft:DejaVu Sans Mono:size=20:antialias=true:hinting=true:style=bold
 log.font:   -*-fixed-*-*-*-*-8-*-*-*-*-*-*-*
 log.boldFont:   -*-fixed-*-*-*-*-8-*-*-*-*-*-*-*
-#*.boldFont: xft:DejaVu Sans Mono:size=20:antialias=true:hinting=true:style=bold
 emacs.font: DejaVu Sans Mono-10
 
 *scrollBar:             false

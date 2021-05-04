@@ -50,8 +50,8 @@ bindsym Mod4+n focus mode_toggle
 
 bindsym Mod4+u split vertical
 bindsym Mod4+y split horizontal
-bindsym Mod4+p exec ~/w/pwd.sh/pwd.sh
-bindsym Mod4+Shift+p exec ~/w/pwd.sh/pwd.sh a
+#bindsym Mod4+p exec ~/w/pwd.sh/pwd.sh
+#bindsym Mod4+Shift+p exec ~/w/pwd.sh/pwd.sh a
 #bindcode Mod4+49 exec sudo chvt 2
 
 # Make the currently focused window a scratchpad
@@ -160,8 +160,9 @@ bindcode Mod4+24 restart
 bindsym Print exec xset dpms force off
 
 
-bindsym Mod4+o exec xbacklight -dec 1
-bindsym Mod4+Shift+o exec xbacklight -inc 1
+bindsym Mod4+o exec chromium --incognito
+bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` + 25)) > /sys/class/backlight/intel_backlight/brightness"
+bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 25)) > /sys/class/backlight/intel_backlight/brightness"
 
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
@@ -171,7 +172,7 @@ ipc-socket ~/.i3/ipc.sock
 #exec i3status | i3bar -d
 #exec i3status | i3bar -d -m
 bar {
-    output            LVDS-1
+    output            eDP-1
     status_command    i3status
     position          bottom
     mode              hide
