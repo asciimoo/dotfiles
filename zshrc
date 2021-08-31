@@ -9,7 +9,7 @@ export EDITOR
 # time that oh-my-zsh is loaded.
 ZSH_THEME=""
 # The almighty $PATH
-PATH="$HOME/bin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/X11R6/bin"
+PATH="$HOME/bin::/usr/local/go/bin:/usr/local/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/games:/usr/X11R6/bin"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -95,6 +95,17 @@ svndiff() {
 }
 gitdiff() {
     git diff "${@}" | colordiff | less -R
+}
+
+stopwatch(){
+    date1=`date +%s`;
+    prevdate=''
+    while true; do
+    days=$(( $(($(date +%s) - date1)) / 86400 ))
+    curdate="$days d $(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)"
+    [[ $prevdate != $curdate ]] && clear && toilet -w 120 -f bigmono9 "$curdate" && prevdate="$curdate"
+    sleep 0.5
+    done
 }
 
 function sshoff() {
