@@ -1,0 +1,15 @@
+(require "asdf")
+
+(setf asdf:*central-registry*
+  (list* '*default-pathname-defaults*
+         #p"/home/a/.quicklisp/local-projects/"
+         asdf:*central-registry*))
+
+;;; The following lines added by ql:add-to-init-file:
+;(quicklisp-quickstart:install :path ".quicklisp/")
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
