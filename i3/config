@@ -161,8 +161,8 @@ bindsym Print exec xset dpms force off
 
 
 bindsym Mod4+o exec chromium --incognito
-bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` + 25)) > /sys/class/backlight/intel_backlight/brightness"
-bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 25)) > /sys/class/backlight/intel_backlight/brightness"
+bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` + 100)) > /sys/class/backlight/intel_backlight/brightness"
+bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 100)) > /sys/class/backlight/intel_backlight/brightness"
 
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
