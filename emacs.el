@@ -174,8 +174,8 @@
 (define-key evil-visual-state-map (kbd "C-n") 'evil-multiedit-next)
 (define-key evil-visual-state-map (kbd "C-p") 'evil-multiedit-prev)
 
-(define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
-(define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+;;(define-key evil-multiedit-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
+;;(define-key evil-motion-state-map (kbd "RET") 'evil-multiedit-toggle-or-restrict-region)
 
 (evil-ex-define-cmd "ie[dit]" 'evil-multiedit-ex-match)
 
@@ -371,6 +371,9 @@ inserted between the braces between the braces."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b" "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466" default))
+ '(ispell-dictionary nil)
  '(package-selected-packages
    '(paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi)))
 
