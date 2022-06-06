@@ -2,7 +2,7 @@
 ;;; commentary:
 
 ;;; dependencies
-(require 'cl)
+(require 'cl-lib)
 (require 'package)
 
 ;;; code:
@@ -32,8 +32,9 @@
     ;;company-jedi
     ;; evil
     evil
+    evil-collection
     evil-leader
-    evil-magit
+    ;;evil-magit
     evil-multiedit
     evil-org
     evil-surround
@@ -70,8 +71,10 @@
     (package-menu-mark-upgrades)
     (package-menu-execute)))
 
+(setq evil-want-integration t)
+(setq evil-want-keybinding nil)
 ;; load required packages
-(loop for p in required-packages
+(cl-loop for p in required-packages
   do (require p))
 
 ;; UI
@@ -161,7 +164,7 @@
 (global-set-key (kbd "C-j") 'evil-window-down)
 (global-set-key (kbd "C-k") 'evil-window-up)
 (global-set-key (kbd "C-l") 'evil-window-right)
-(loop for (mode . state) in '((dired-mode . normal) ; can be normal, insert, emacs, etc..
+(cl-loop for (mode . state) in '((dired-mode . normal) ; can be normal, insert, emacs, etc..
                               (org-agenda-mode . normal)
                               (magit-diff-mode . normal)
                               (magit-log-mode . normal))
@@ -375,5 +378,5 @@ inserted between the braces between the braces."
    '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b" "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466" default))
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi)))
+   '(evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi)))
 
