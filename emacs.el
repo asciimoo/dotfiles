@@ -14,9 +14,10 @@
 (defvar required-packages
   '(
     desktop
+    dumb-jump
+    ggtags
     linum-relative
     magit
-    ggtags
     paganini-theme
     projectile
     recentf
@@ -24,8 +25,8 @@
     smooth-scrolling
     spaceline
     sr-speedbar
-    yasnippet
     undo-tree
+    yasnippet
     ;; company
     ;company
     ;company-php
@@ -54,6 +55,7 @@
     php-mode
     yaml-mode
     web-mode
+    js2-mode
    )
 )
 
@@ -124,6 +126,7 @@
 
 ;; CUSTOMISATIONS
 ;; undo
+(setq undo-tree-auto-save-history nil) ;; (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 (global-undo-tree-mode t)
 ;; use 4 spaces instead of tabs
 (setq-default tab-width 4 indent-tabs-mode nil)
@@ -142,6 +145,8 @@
 (setq auto-save-default nil)
 ;; remap c-x to c-a too
 (keyboard-translate ?\C-a ?\C-x)
+
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; KEY BINDINGS
 (global-set-key [f8] 'linum-relative-toggle)
@@ -345,9 +350,10 @@ inserted between the braces between the braces."
 ;; PYTHON-MODE
 ;(define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; WEB-MODE
+;; WEB
 
 (add-to-list 'auto-mode-alist '("\\.tpl\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; C-MODE
 
@@ -378,5 +384,6 @@ inserted between the braces between the braces."
    '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b" "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466" default))
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi)))
+   '(js2-mode evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))
+ '(warning-suppress-types '((comp))))
 
