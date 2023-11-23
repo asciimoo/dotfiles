@@ -22,6 +22,7 @@
     projectile
     recentf
     semantic
+    smartparens
     smooth-scrolling
     spaceline
     sr-speedbar
@@ -38,6 +39,7 @@
     ;;evil-magit
     evil-multiedit
     evil-org
+    evil-smartparens
     evil-surround
    ;; ivy
     ivy
@@ -152,9 +154,11 @@
 (global-set-key [f8] 'linum-relative-toggle)
 (global-set-key [f9] 'toggle-menu-bar-mode-from-frame)
 
-;; ELECTRIC-PAIR-MODE
+;; SMARTPARENS
 
-(electric-pair-mode)
+(require 'smartparens-config)
+(smartparens-global-strict-mode t)
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 
 ;;; PACKAGE SPECIFIC SETTINGS
 
@@ -303,20 +307,6 @@
                     (lambda () (local-set-key (kbd "C-0") #'run-latexmk)))
 ; jump to definition
 ;(local-set-key (kbd "C-x j") 'godef-jump)
-(defun my-go-electric-brace ()
-  "Insert an opening brace may be with the closing one.
-If there is a space before the brace also adds new line with
-properly indented closing brace and moves cursor to another line
-inserted between the braces between the braces."
-  (interactive)
-  (insert "{")
-  (when (looking-back " {")
-    (newline)
-    (indent-according-to-mode)
-    (save-excursion
-      (newline)
-      (insert "}")
-      (indent-according-to-mode))))
 
 (defun my-godoc-package ()
   "Display godoc for given package (with completion)."
@@ -340,7 +330,6 @@ inserted between the braces between the braces."
   '(progn
      (local-set-key (kbd "C-x j") 'godef-jump)
      (local-set-key (kbd "C-x d") 'my-godoc-package)
-     (local-set-key (kbd "{") 'my-go-electric-brace)
    )
 )
 
@@ -384,6 +373,6 @@ inserted between the braces between the braces."
    '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b" "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466" default))
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(js2-mode evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))
+   '(evil-smartparens smartparens js2-mode evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))
  '(warning-suppress-types '((comp))))
 
