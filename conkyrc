@@ -23,8 +23,8 @@ own_window_title = 'Conky',
 --## Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
 -- own_window_argb_value 50
 
-minimum_width = 1980,
-minimum_height = 20,
+minimum_width = 3840,
+minimum_height = 30,
 alignment = top_left,
 
 gap_x = 0,--## left | right
@@ -33,7 +33,7 @@ gap_y = 0,--## up | down
 --##  Font Settings  #############################
 -- Use Xft (anti-aliased font and stuff)
 use_xft = true,
-font = 'Noto Sans:Regular:size=9',
+font = 'Noto Sans:Regular:size=16',
 
 
 -- Alpha of Xft font. Must be a value at or between 1 and 0 ###
@@ -71,7 +71,12 @@ use_spacer = left,
 pad_percents = 2,
 -- graph borders
 draw_graph_borders = true,--no
---default_graph_size 15 40
+--default_graph_height = 50,
+--default_graph_width = 200,
+--default_bar_height = 50,
+--default_bar_width = 200,
+--default_gauge_height = 50,
+--default_gauge_width = 200,
 --#######################  End Borders Secton  ###
 --##  Miscellaneous Section  #####################
 -- Boolean value, if true, Conky will be forked to background when started.
@@ -116,9 +121,10 @@ update_interval = 1,
 };
 
 conky.text = [[
-${color #FF3366}[C:${color #FF0066}${cpu cpu0}% ${color #33FF66}${cpugraph cpu0 10,50} ${freq 0} MHz][${acpitemp}C]${color #FF3366}[M:$mem S:$swap ]${color #33FF66}[DIO ${diskiograph 10,50} ${diskio} ${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
-${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 10,50 } ] ${endif}\
-${if_up ppp0}[${color #FF3366}ppp0:${color #33FF66}D ${downspeed ppp0} k/s ${color #FF3366}${downspeedgraph ppp0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed ppp0} k/ ${color #FF3366}${upspeedgraph ppp0 10,50 }] ${endif}\
-${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0 10,50} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 10,50 wlan0}${endif}\
-${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 10,50} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 10,50} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 10,50 wlan2}${endif} | ${battery_percent}(${battery_time}) | [${execi 1800 '/home/a/bin/isHack'}]
+${color #FF3366}[C:${color #FF0066}${cpu cpu0}% ${color #33FF66}${cpugraph cpu0 20,100} ${freq 0} MHz][${execi 5 sensors | grep -A 1 'Tccd' | cut -c16-23 | tr -d '\n'}]${color #FF3366}[M:$mem S:$swap ]${color #33FF66}[DIO ${diskiograph 20,100} ${diskio} ${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
+${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 20,100 } ] ${endif}\
+${if_up ppp0}[${color #FF3366}ppp0:${color #33FF66}D ${downspeed ppp0} k/s ${color #FF3366}${downspeedgraph ppp0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed ppp0} k/ ${color #FF3366}${upspeedgraph ppp0 20,100 }] ${endif}\
+${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0 20,100} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 20,100 wlan0}${endif}\
+${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 20,100} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 20,100 wlan2}${endif} | [${execi 1800 '/home/a/bin/isHack'}]
 ]];
+--${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 20,100} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 20,100 wlan2}${endif} | ${battery_percent}(${battery_time}) | [${execi 1800 '/home/a/bin/isHack'}]

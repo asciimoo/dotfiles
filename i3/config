@@ -115,17 +115,17 @@ mode "resize" {
     # when pressing left, the window is resized so that it has
     # more space on its left
 
-    bindsym h resize shrink left 1 px
-    bindsym Shift+h resize grow left 1 px
+    bindsym h resize shrink left 10 px
+    bindsym Shift+h resize grow left 10 px
 
-    bindsym j resize grow down 1 px
-    bindsym Shift+j resize shrink down 1 px
+    bindsym j resize grow down 10 px
+    bindsym Shift+j resize shrink down 10 px
 
-    bindsym k resize shrink up 1 px
-    bindsym Shift+k resize grow up 1 px
+    bindsym k resize shrink up 10 px
+    bindsym Shift+k resize grow up 10 px
 
-    bindsym l resize grow right 1 px
-    bindsym Shift+l resize shrink right 1 px
+    bindsym l resize grow right 10 px
+    bindsym Shift+l resize shrink right 10 px
 
     bindcode 36 mode "default"
 }
@@ -164,6 +164,8 @@ bindsym Mod4+o exec chromium --incognito
 bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` + 100)) > /sys/class/backlight/intel_backlight/brightness"
 bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 100)) > /sys/class/backlight/intel_backlight/brightness"
 
+for_window [class="awakened-poe-trade"] floating enable
+
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
 ipc-socket ~/.i3/ipc.sock
@@ -172,14 +174,15 @@ ipc-socket ~/.i3/ipc.sock
 #exec i3status | i3bar -d
 #exec i3status | i3bar -d -m
 bar {
-    output            eDP-1
+    output            DisplayPort-0
     status_command    i3status
     position          bottom
     mode              hide
     workspace_buttons yes
     tray_output       none
 
-    font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+    #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+    font -xos4-*-*-*-*-*-28-*-*-*-*-*-*-*
 
     colors {
         background #000000

@@ -3,8 +3,8 @@ general {
     interval = 3
 }
 
-order += "volume master"
-order += "battery 0"
+#order += "volume master"
+#order += "battery 0"
 order += "load"
 order += "time"
 

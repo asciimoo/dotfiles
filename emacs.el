@@ -94,21 +94,13 @@
  ;; If there is more than one, they won't work right.
  '(linum ((t (:background "black" :foreground "green yellow"))))
  '(mouse ((t (:background "light gray"))))
- '(org-document-title ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 2.0 :underline nil))))
- '(org-level-1 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.75))))
- '(org-level-2 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.5))))
- '(org-level-3 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.25))))
- '(org-level-4 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif" :height 1.1))))
- '(org-level-5 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
- '(org-level-6 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
- '(org-level-7 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
- '(org-level-8 ((t (:inherit default :weight bold :foreground "#F8F8F2" :family "Sans Serif"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#2D2D2D" :foreground "light gray")))))
 
 
 
 (setq-default show-trailing-whitespace t)
-(set-face-attribute 'default nil :height 90)
+;; font size
+(set-face-attribute 'default nil :height 160)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -253,27 +245,55 @@
                               ("a" "Agenda" entry
                                (file+headline "~/d/org/agenda.org" "Agenda")
                                "* TODO %i%? \n %U")))
-(let* ((variable-tuple
-          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-         (base-font-color     (face-foreground 'default nil 'default))
-         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
-
-    (custom-theme-set-faces
-     'user
-     `(org-level-8 ((t (,@headline ,@variable-tuple))))
-     `(org-level-7 ((t (,@headline ,@variable-tuple))))
-     `(org-level-6 ((t (,@headline ,@variable-tuple))))
-     `(org-level-5 ((t (,@headline ,@variable-tuple))))
-     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
-     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
-     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+;(setq org-font-variable-height nil)
+;(defun toggle-org-format ()
+;  (interactive)
+;  (if (eq org-font-variable-height nil)
+;    (progn
+;        (let* ((variable-tuple
+;            (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+;                    ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+;                    ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+;                    ((x-list-fonts "Verdana")         '(:font "Verdana"))
+;                    ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+;                    (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+;            (base-font-color     (face-foreground 'default nil 'default))
+;            (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+;            (custom-theme-set-faces
+;            'user
+;            `(org-level-8 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-7 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-6 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-5 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-4 ((t (,@headline ,@variable-tuple :height 1))))
+;            `(org-level-3 ((t (,@headline ,@variable-tuple :height 1))))
+;            `(org-level-2 ((t (,@headline ,@variable-tuple :height 1))))
+;            `(org-level-1 ((t (,@headline ,@variable-tuple :height 1))))
+;            `(org-document-title ((t (,@headline ,@variable-tuple :height 1.0 :underline t))))))
+;        (setq org-font-variable-height t))
+;    (progn
+;        (let* ((variable-tuple
+;            (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
+;                    ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
+;                    ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
+;                    ((x-list-fonts "Verdana")         '(:font "Verdana"))
+;                    ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
+;                    (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
+;            (base-font-color     (face-foreground 'default nil 'default))
+;            (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
+;            (custom-theme-set-faces
+;            'user
+;            `(org-level-8 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-7 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-6 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-5 ((t (,@headline ,@variable-tuple))))
+;            `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
+;            `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
+;            `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
+;            `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
+;            `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
+;        (setq org-font-variable-height nil)))
+;  )
 
 ;; RECENTF
 (recentf-mode 1)
@@ -371,9 +391,19 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b" "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466" default))
+   '("3f3c48d3835286245137ad2fffbe43c634fef7f33500b008ec3cecc3672e7e3b"
+     "8f567db503a0d27202804f2ee51b4cd409eab5c4374f57640317b8fcbbd3e466"
+     default))
  '(ispell-dictionary nil)
  '(package-selected-packages
-   '(evil-smartparens smartparens js2-mode evil-collection paganini-theme org-bullets poet-theme undo-tree web-mode go-guru auto-yasnippet mmm-mode jedi yasnippet yaml-mode sr-speedbar spaceline smooth-scrolling smex molokai-theme markdown-mode linum-relative less-css-mode go-mode evil-surround evil-org evil-multiedit evil-magit evil-leader counsel-projectile company-php company-jedi))
+   '(auto-yasnippet company-jedi company-php counsel-projectile
+                    evil-collection evil-leader evil-magit
+                    evil-multiedit evil-org evil-smartparens
+                    evil-surround go-guru go-mode jedi js2-mode
+                    less-css-mode linum-relative markdown-mode
+                    mmm-mode molokai-theme org-bullets paganini-theme
+                    poet-theme smartparens smex smooth-scrolling
+                    spaceline sr-speedbar undo-tree web-mode yaml-mode
+                    yasnippet))
  '(warning-suppress-types '((comp))))
 

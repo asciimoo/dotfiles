@@ -14,13 +14,14 @@ setxkbmap -option grp:switch,grp:rctrl_switch,grp_led:scroll us,hu
 #feh --bg-scale --no-fehbg /home/a/i/bg/gray-robot-pattern.png
 #feh --bg-scale --no-fehbg  _1287534334.jpg
 feh --bg-scale --no-fehbg /home/a/i/bg/wood.jpg
+/usr/libexec/xdg-desktop-portal-gtk&
 #xhost +si:localuser:b
 #xcompmgr -c -f -F -o 0.5&
 #wmii
 #tritium
 (sleep 4 && conky)&
 
-urxvtd&
+#urxvtd&
 #exec xmonad
 #openbox
 #sawfish
@@ -40,6 +41,8 @@ urxvtd&
 #exec /home/wipeover/bin/i3 -V -d all >> ~/.i3/logfile
 #python /usr/share/doc/python-plwm/examples/hrwwm.py
 #exec herbstluftwm
+
+alacritty&
 exec i3
 
 #exec stumpwm
