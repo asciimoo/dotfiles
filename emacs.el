@@ -157,7 +157,8 @@
 ;; SMARTPARENS
 
 (require 'smartparens-config)
-(smartparens-global-strict-mode t)
+;(smartparens-global-strict-mode t)
+(smartparens-global-mode t)
 (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 
 ;;; PACKAGE SPECIFIC SETTINGS
