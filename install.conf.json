@@ -25,6 +25,7 @@
             "~/.config/i3": "i3/",
             "~/.config/i3status": "i3status/",
             "~/.config/matplotlib": "matplotlib/",
+            "~/.config/alacritty/alacritty.toml": "alacritty.toml",
             "~/bin/log": "bin/log",
             "~/bin/gitlog": "bin/gitlog",
             "~/bin/clock": "bin/clock",
