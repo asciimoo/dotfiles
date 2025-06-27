@@ -2,7 +2,7 @@
 term = "xterm-256color"
 
 [font]
-size = 11.0
+size = 15.0
 
 [font.bold]
 family = "dejavu sans mono"
@@ -37,7 +37,7 @@ black =   '#000000'
 red =     '#F44243'
 green =   '#00CF6B'
 yellow =  '#FFD750'
-blue =    '#0067BD'
+blue =    '#0087DD'
 magenta = '#FA4EFE'
 cyan =    '#20B2AA'
 white =   '#FFFFFF'
