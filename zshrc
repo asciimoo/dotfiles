@@ -190,7 +190,8 @@ chpwd_functions=(${chpwd_functions[@]} "_set_parent_hist")
 
 _set_parent_hist
 
-MAIL=/home/a/.mail && export MAIL
+#MAIL=/home/a/.mail && export MAIL
+unset MAIL
 #export GOROOT=$HOME/t/go
 #export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/w
