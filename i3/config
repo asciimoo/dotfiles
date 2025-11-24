@@ -8,6 +8,8 @@ font -misc-fixed-*-*-*-*-6-*-*-*-*-*-*-*
 new_window 1pixel
 
 focus_follows_mouse no
+focus_wrapping workspace
+
 
 #######
 #COLORS #border #bkgrnd #text  #
@@ -89,7 +91,7 @@ bindcode Mod4+10 workspace term
 bindcode Mod4+11 workspace web
 bindcode Mod4+12 workspace misc
 bindcode Mod4+13 workspace chat
-bindcode Mod4+14 workspace gimp
+bindcode Mod4+14 workspace 5
 bindcode Mod4+15 workspace 6
 bindcode Mod4+16 workspace 7
 bindcode Mod4+17 workspace 8
@@ -101,7 +103,7 @@ bindcode Mod4+Shift+10 move workspace term
 bindcode Mod4+Shift+11 move workspace web
 bindcode Mod4+Shift+12 move workspace misc
 bindcode Mod4+Shift+13 move workspace chat
-bindcode Mod4+Shift+14 move workspace gimp
+bindcode Mod4+Shift+14 move workspace 5
 bindcode Mod4+Shift+15 move workspace 6
 bindcode Mod4+Shift+16 move workspace 7
 bindcode Mod4+Shift+17 move workspace 8
@@ -134,7 +136,7 @@ mode "resize" {
 bindcode Mod4+27 mode "resize"
 
 # Mod4+Enter starts a new terminal
-bindcode Mod4+36 exec urxvtc
+bindcode Mod4+36 exec alacritty
 
 
 # Mod4+Enter starts screensaver
@@ -165,16 +167,22 @@ bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightnes
 bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 100)) > /sys/class/backlight/intel_backlight/brightness"
 
 for_window [class="awakened-poe-trade"] floating enable
+for_window [title="/ MiniMeters"] fullscreen enable
+assign [title="/ MiniMeters"] 5
+
+workspace 5 output HDMI-A-0
 
 # The IPC interface allows programs like an external workspace bar
 # (i3-wsbar) or i3-msg (can be used to "remote-control" i3) to work.
 ipc-socket ~/.i3/ipc.sock
 
+bindsym Mod4+x move workspace to output DisplayPort-2
+
 # XXX: Automatically added a call to i3bar to provide a workspace bar
 #exec i3status | i3bar -d
 #exec i3status | i3bar -d -m
 bar {
-    output            DisplayPort-0
+    output            DisplayPort-2
     status_command    i3status
     position          bottom
     mode              hide
