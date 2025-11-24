@@ -12,6 +12,9 @@ own_window_hints = 'undecorated,below,skip_taskbar,skip_pager',
 own_window_colour = '#000000',
 own_window_class = 'Conky',
 own_window_title = 'Conky',
+xinerama_head = 0,
+--use_spacer = 'left',
+--pad_percents = 2,
 --## ARGB can be used for real transparency
 --## NOTE that a composite manager is required for real transparency.
 --## This option will not work as desired (in most cases) in conjunction with
@@ -25,15 +28,15 @@ own_window_title = 'Conky',
 
 minimum_width = 3840,
 minimum_height = 30,
-alignment = top_left,
+alignment = bottom_left,
 
-gap_x = 0,--## left | right
-gap_y = 0,--## up | down
+--gap_x = 0,--## left | right
+--gap_y = 0,--## up | down
 --######################  End Window Settings  ###
 --##  Font Settings  #############################
 -- Use Xft (anti-aliased font and stuff)
 use_xft = true,
-font = 'Noto Sans:Regular:size=16',
+font = 'Noto Sans:Regular:size=17',
 
 
 -- Alpha of Xft font. Must be a value at or between 1 and 0 ###
@@ -70,11 +73,11 @@ border_width = 1,
 use_spacer = left,
 pad_percents = 2,
 -- graph borders
-draw_graph_borders = true,--no
---default_graph_height = 50,
---default_graph_width = 200,
---default_bar_height = 50,
---default_bar_width = 200,
+draw_graph_borders = yes,--no
+default_graph_height = 22,
+default_graph_width = 100,
+default_bar_height = 11,
+default_bar_width = 20,
 --default_gauge_height = 50,
 --default_gauge_width = 200,
 --#######################  End Borders Secton  ###
@@ -121,10 +124,45 @@ update_interval = 1,
 };
 
 conky.text = [[
-${color #FF3366}[C:${color #FF0066}${cpu cpu0}% ${color #33FF66}${cpugraph cpu0 20,100} ${freq 0} MHz][${execi 5 sensors | grep -A 1 'Tccd' | cut -c16-23 | tr -d '\n'}]${color #FF3366}[M:$mem S:$swap ]${color #33FF66}[DIO ${diskiograph 20,100} ${diskio} ${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
-${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 20,100 } ] ${endif}\
-${if_up ppp0}[${color #FF3366}ppp0:${color #33FF66}D ${downspeed ppp0} k/s ${color #FF3366}${downspeedgraph ppp0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed ppp0} k/ ${color #FF3366}${upspeedgraph ppp0 20,100 }] ${endif}\
-${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0 20,100} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 20,100 wlan0}${endif}\
-${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 20,100} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 20,100 wlan2}${endif} | [${execi 1800 '/home/a/bin/isHack'}]
+${color #FF3366} C:${color #FF0066}${cpu cpu0}% \
+${goto 80}${color #33FF66}[${execi 5 sensors | grep -A 1 'Tccd' | cut -c16-23 | tr -d '\n'}] ${cpugraph cpu0} ${freq 0} MHz ${goto 300}\
+${goto 480}${color #FF3366}[M:$mem S:$swap ]\
+${goto 680}${color #33FF66}[DIO ${diskiograph} ${diskio}\
+${goto 930}${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
+${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${alignc 2}${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 } ] ${endif}\
+${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 24,100 wlan0}${endif}\
+[${execi 1800 '/home/a/bin/unread_items'}]\
+${alignr}${color #33FF66}\
+${goto 2800}${voffset 4}${cpubar cpu1}\
+${cpubar cpu2}\
+${cpubar cpu3}\
+${cpubar cpu4}\
+${cpubar cpu5}\
+${cpubar cpu6}\
+${cpubar cpu7}\
+${cpubar cpu8}\
+${cpubar cpu9}\
+${cpubar cpu11}\
+${cpubar cpu12}\
+${cpubar cpu13}\
+${cpubar cpu14}\
+${cpubar cpu15}\
+${cpubar cpu16}\
+${cpubar cpu17}\
+${voffset -11}${goto 2800}${cpubar cpu10}\
+${cpubar cpu18}\
+${cpubar cpu19}\
+${cpubar cpu20}\
+${cpubar cpu21}\
+${cpubar cpu22}\
+${cpubar cpu23}\
+${cpubar cpu24}\
+${cpubar cpu25}\
+${cpubar cpu26}\
+${cpubar cpu27}\
+${cpubar cpu28}\
+${cpubar cpu29}\
+${cpubar cpu30}\
+${cpubar cpu31}\
+${cpubar cpu32}\
 ]];
---${if_up wlan2}[wlan2: ${color #33FF66}D:${color 8844ee} ${downspeed wlan2} k/s ${downspeedgraph wlan2 20,100} ${color #FF3366}U:${color #FF3366} ${upspeed wlan2} k/s ${upspeedgraph wlan2 20,100} | essid: ${wireless_essid wlan2} ${wireless_bitrate wlan2} ${wireless_link_bar 20,100 wlan2}${endif} | ${battery_percent}(${battery_time}) | [${execi 1800 '/home/a/bin/isHack'}]
