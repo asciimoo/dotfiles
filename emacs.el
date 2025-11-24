@@ -16,7 +16,6 @@
     desktop
     dumb-jump
     ggtags
-    linum-relative
     magit
     paganini-theme
     projectile
@@ -75,6 +74,14 @@
     (package-menu-mark-upgrades)
     (package-menu-execute)))
 
+(defun toggle-rel-linum ()
+  (interactive)
+  (if (equal display-line-numbers-type 'relative)
+    (setq display-line-numbers-type 'absolute)
+    (setq display-line-numbers-type 'relative))
+  (save-buffer)
+  (revert-buffer :ignore-auto :noconfirm))
+
 (setq evil-want-integration t)
 (setq evil-want-keybinding nil)
 ;; load required packages
@@ -92,10 +99,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(linum ((t (:background "black" :foreground "green yellow"))))
  '(mouse ((t (:background "light gray"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#2D2D2D" :foreground "light gray")))))
 
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode 1)
+;; (global-hl-line-mode +1)
 
 
 (setq-default show-trailing-whitespace t)
@@ -106,8 +115,6 @@
 (menu-bar-mode 0)
 (show-paren-mode t)
 (scroll-bar-mode -1)
-(setq linum-relative-backend 'display-line-numbers-mode)
-(linum-relative-global-mode)
 
 (setq inhibit-splash-screen t
       inhibit-startup-echo-area-message t
@@ -143,7 +150,7 @@
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 ;; KEY BINDINGS
-(global-set-key [f8] 'linum-relative-toggle)
+(global-set-key [f8] 'toggle-rel-linum)
 (global-set-key [f9] 'toggle-menu-bar-mode-from-frame)
 
 ;; SMARTPARENS
@@ -400,7 +407,7 @@
                     evil-collection evil-leader evil-magit
                     evil-multiedit evil-org evil-smartparens
                     evil-surround go-guru go-mode jedi js2-mode
-                    less-css-mode linum-relative markdown-mode
+                    less-css-mode markdown-mode
                     mmm-mode molokai-theme org-bullets paganini-theme
                     poet-theme smartparens smex smooth-scrolling
                     spaceline sr-speedbar undo-tree web-mode yaml-mode
