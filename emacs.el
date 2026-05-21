@@ -30,17 +30,17 @@
     ;; company
     ;company
     ;company-php
-    ;;company-jedi
+    ;company-jedi
     ;; evil
     evil
     evil-collection
     evil-leader
-    ;;evil-magit
+    ;evil-magit
     evil-multiedit
     evil-org
     evil-smartparens
     evil-surround
-   ;; ivy
+    ;; ivy
     ivy
     counsel
     counsel-projectile
@@ -54,6 +54,8 @@
     markdown-mode
     less-css-mode
     php-mode
+    svelte-mode
+    typescript-mode
     yaml-mode
     web-mode
     js2-mode
@@ -87,6 +89,8 @@
 ;; load required packages
 (cl-loop for p in required-packages
   do (require p))
+
+(setq create-lockfiles nil)
 
 ;; UI
 (load-theme 'paganini t)
@@ -165,6 +169,7 @@
 ;; EVIL MODE
 (evil-mode 1)
 (global-evil-surround-mode 1)
+(evil-collection-init)
 (evil-set-undo-system 'undo-tree)
 
 (with-eval-after-load 'evil-maps
@@ -407,10 +412,10 @@
                     evil-collection evil-leader evil-magit
                     evil-multiedit evil-org evil-smartparens
                     evil-surround go-guru go-mode jedi js2-mode
-                    less-css-mode markdown-mode
-                    mmm-mode molokai-theme org-bullets paganini-theme
-                    poet-theme smartparens smex smooth-scrolling
-                    spaceline sr-speedbar undo-tree web-mode yaml-mode
-                    yasnippet))
+                    less-css-mode markdown-mode mmm-mode molokai-theme
+                    notmuch org-bullets paganini-theme poet-theme
+                    smartparens smex smooth-scrolling spaceline
+                    sr-speedbar svelte-mode typescript-mode undo-tree
+                    web-mode yaml-mode yasnippet))
  '(warning-suppress-types '((comp))))
 
