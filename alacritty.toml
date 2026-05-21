@@ -2,7 +2,7 @@
 term = "xterm-256color"
 
 [font]
-size = 15.0
+size = 10.0
 
 [font.bold]
 family = "dejavu sans mono"
@@ -37,8 +37,8 @@ black =   '#000000'
 red =     '#F44243'
 green =   '#00CF6B'
 yellow =  '#FFD750'
-blue =    '#0087DD'
-magenta = '#FA4EFE'
+blue =    '#1097CD'
+magenta = '#CA5ECE'
 cyan =    '#20B2AA'
 white =   '#FFFFFF'
 
@@ -51,3 +51,24 @@ blue =    '#007FFF'
 magenta = '#FF1493'
 cyan =    '#00CCCC'
 white =   '#FFFFFF'
+
+[colors.hints.end]
+background = "#FF00FF"
+foreground = "#FFD750"
+
+[colors.hints.start]
+background = "#FF0000"
+foreground = "#FFD750"
+
+[[hints.enabled]]
+regex = "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+command = "xdg-open"
+hyperlinks = true
+persist = true
+post_processing = true
+mouse.enabled = true
+#mouse.mods = "Control"
+
+#[colors.selection]
+#background = "#FF0000"
+#foreground = "#FFD750"
