@@ -43,6 +43,7 @@ feh --bg-scale --no-fehbg /home/a/i/bg/wood.jpg
 #exec herbstluftwm
 
 alacritty&
+xrdb .Xresources
 exec i3
 
 #exec stumpwm

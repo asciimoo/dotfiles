@@ -14,6 +14,7 @@
             "~/.emacs": "emacs.el",
             "~/.Xdefaults": "Xdefaults",
             "~/.xinitrc": "xinitrc",
+            "~/.Xresources": "Xresources",
             "~/.conkyrc": "conkyrc",
             "~/.vimrc": "vimrc",
             "~/.vim": "vim/",
