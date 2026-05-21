@@ -76,18 +76,18 @@ setopt hist_ignore_dups
 
 if [[ $ZSH_VERSION_TYPE == 'new' ]]; then
   setopt \
-        hist_expire_dups_first \
-        hist_ignore_all_dups \
-     NO_hist_no_functions \
-        hist_save_no_dups \
-        inc_append_history \
-        list_packed \
-        rm_star_wait
+        HIST_EXPIRE_DUPS_FIRST \
+        HIST_IGNORE_ALL_DUPS \
+     NO_HIST_NO_FUNCTIONS \
+        HIST_SAVE_NO_DUPS \
+        INC_APPEND_HISTORY \
+        LIST_PACKED \
+        RM_STAR_WAIT
 fi
 
 if [[ $ZSH_VERSION == 3.0.<6->* || $ZSH_VERSION_TYPE == 'new' ]]; then
   setopt \
-        hist_reduce_blanks
+        HIST_REDUCE_BLANKS
 fi
 
 svndiff() {
