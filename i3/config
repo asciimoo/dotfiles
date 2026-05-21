@@ -162,12 +162,18 @@ bindcode Mod4+24 restart
 bindsym Print exec xset dpms force off
 
 
-bindsym Mod4+o exec chromium --incognito
+#bindsym Mod4+o exec chromium --incognito
+bindsym Mod4+o exec xdg-open "http://127.0.0.1:4433/"
 bindsym Mod4+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` + 100)) > /sys/class/backlight/intel_backlight/brightness"
 bindsym Mod4+Shift+p exec "echo $((`cat /sys/class/backlight/intel_backlight/brightness` - 100)) > /sys/class/backlight/intel_backlight/brightness"
 
 for_window [class="awakened-poe-trade"] floating enable
+for_window [class="exiled-exchange-2"] floating enable
+assign [class="exiled-exchange-2"] chat
 for_window [title="/ MiniMeters"] fullscreen enable
+for_window [class="Terraria.bin"] fullscreen enable
+#for_window [urgent="latest"] focus
+#for_window [class="Lorch"] floating enable move left 1000px,move up 800px
 assign [title="/ MiniMeters"] 5
 
 workspace 5 output HDMI-A-0
