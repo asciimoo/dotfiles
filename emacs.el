@@ -14,6 +14,7 @@
 (defvar required-packages
   '(
     desktop
+    corfu
     dumb-jump
     ggtags
     magit
@@ -70,11 +71,9 @@
       (package-install p))))
 
 (defun update-packages ()
+  "Refresh package metadata and upgrade all installed packages."
   (interactive)
-  (progn
-    (package-refresh-contents)
-    (package-menu-mark-upgrades)
-    (package-menu-execute)))
+  (package-upgrade-all nil))
 
 (defun toggle-rel-linum ()
   (interactive)
@@ -103,6 +102,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(corfu-default ((t (:background "#1c1c1c"))))
  '(mouse ((t (:background "light gray"))))
  '(powerline-active1 ((t (:inherit mode-line :background "#2D2D2D" :foreground "light gray")))))
 
@@ -166,11 +166,69 @@
 
 ;;; PACKAGE SPECIFIC SETTINGS
 
+;; CORFU
+(setq tab-always-indent 'complete
+      corfu-on-exact-match 'show)
+(global-corfu-mode 1)
+
+(defun preserve-window-start-around-corfu-completion (completion &rest args)
+  "Run COMPLETION without scrolling the source window when Corfu is active."
+  (if (not (bound-and-true-p corfu-mode))
+      (apply completion args)
+    (let ((window (selected-window))
+          (start (window-start)))
+      (unwind-protect
+          (apply completion args)
+        (when (window-live-p window)
+          (set-window-start window start t))))))
+
+(unless (advice-member-p #'preserve-window-start-around-corfu-completion
+                         #'completion-at-point)
+  (advice-add #'completion-at-point :around
+              #'preserve-window-start-around-corfu-completion))
+
+;; GO
+(require 'eglot)
+(add-to-list 'exec-path (expand-file-name "~/bin"))
+
+(defun setup-go-eglot-completion ()
+  "Use only gopls completion in managed Go buffers."
+  (when (derived-mode-p 'go-mode 'go-ts-mode)
+    (setq-local completion-at-point-functions
+                '(eglot-completion-at-point))))
+
+(defun go-indent-or-complete ()
+  "Indent leading whitespace or complete the Go symbol at point."
+  (interactive)
+  (if (or (use-region-p)
+          (string-match-p "\\`[[:space:]]*\\'"
+                          (buffer-substring-no-properties
+                           (line-beginning-position) (point))))
+      (indent-for-tab-command)
+    (unless (eglot-managed-p)
+      (call-interactively #'eglot))
+    (completion-at-point)))
+
+(defun setup-go-mode ()
+  "Enable Go language support and semantic TAB completion."
+  (eglot-ensure)
+  (local-set-key (kbd "TAB") #'go-indent-or-complete)
+  (local-set-key (kbd "<tab>") #'go-indent-or-complete))
+
+(add-hook 'go-mode-hook #'setup-go-mode)
+(add-hook 'go-ts-mode-hook #'setup-go-mode)
+(add-hook 'eglot-managed-mode-hook #'setup-go-eglot-completion)
+
 ;; EVIL MODE
 (evil-mode 1)
 (global-evil-surround-mode 1)
 (evil-collection-init)
 (evil-set-undo-system 'undo-tree)
+
+(dolist (map (list evil-normal-state-map evil-motion-state-map))
+  (define-key map (kbd "M-.") #'xref-find-definitions)
+  (define-key map (kbd "M-?") #'xref-find-references)
+  (define-key map (kbd "M-,") #'xref-go-back))
 
 (with-eval-after-load 'evil-maps
   (define-key evil-motion-state-map (kbd "TAB") nil))
@@ -418,4 +476,3 @@
                     sr-speedbar svelte-mode typescript-mode undo-tree
                     web-mode yaml-mode yasnippet))
  '(warning-suppress-types '((comp))))
-
