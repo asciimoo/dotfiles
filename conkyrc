@@ -125,10 +125,10 @@ update_interval = 1,
 
 conky.text = [[
 ${color #FF3366} C:${color #FF0066}${cpu cpu0}% \
-${goto 80}${color #33FF66}[${execi 5 sensors | grep -A 1 'Tccd' | cut -c16-23 | tr -d '\n'}] ${cpugraph cpu0} ${freq 0} MHz ${goto 300}\
-${goto 480}${color #FF3366}[M:$mem S:$swap ]\
-${goto 680}${color #33FF66}[DIO ${diskiograph} ${diskio}\
-${goto 930}${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
+${goto 100}${color #33FF66}[${execi 5 sensors | grep -A 1 'Tccd' | cut -c16-23 | tr -d '\n'}] ${cpugraph cpu0} ${freq 0} MHz ${goto 300}\
+${goto 540}${color #FF3366}[M:$mem S:$swap ]\
+${goto 780}${color #33FF66}[DIO ${diskiograph} ${diskio}\
+${goto 1030}${color #FF3366}/ ${fs_free_perc /}% | /home ${fs_free_perc /home}% | /var ${fs_free_perc /var}% | /usr ${fs_free_perc /usr}%] \
 ${if_up eth0}[${color #FF3366}eth0:${color #33FF66}D ${alignc 2}${downspeed eth0} k/s ${color #FF3366}${downspeedgraph eth0} ${color #FF3366}U:${color #FF3366} ${upspeed eth0} k/ ${color #FF3366}${upspeedgraph eth0 } ] ${endif}\
 ${if_up wlan0}[wlan0: ${color #33FF66}D:${color 8844ee} ${downspeed wlan0} k/s ${downspeedgraph wlan0} ${color #FF3366}U:${color #FF3366} ${upspeed wlan0} k/s ${upspeedgraph wlan0} | essid: ${wireless_essid wlan0} ${wireless_bitrate wlan0} ${wireless_link_bar 24,100 wlan0}${endif}\
 [${execi 1800 '/home/a/bin/unread_items'}]\
