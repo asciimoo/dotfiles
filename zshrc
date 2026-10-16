@@ -38,7 +38,10 @@ source $HOME/.zsh_theme
 # Set up aliases
 bindkey -M vicmd '^R' history-incremental-pattern-search-backward
 bindkey -M viins '^R' history-incremental-pattern-search-backward
-HISTFILE=~/.zshhistory
+# Keep the active history context when this file is sourced again.
+if (( ! ${_local_hist_context:-0} )); then
+    HISTFILE=~/.zshhistory
+fi
 HISTSIZE=100000
 SAVEHIST=100000
 alias bob='espeak -vhu -p 30 -s 145'
@@ -156,11 +159,9 @@ ZSH_VERSION_TYPE='new'
 
 # stefs historian - https://www.ctrlc.hu/~stef/historian.sh
 function start_local_hist() {
-    touch ".zshhistory"
-    fc -AI "$HISTFILE"
-    export HISTFILE=$(echo .zshhistory(:A))
+    touch -- ".zshhistory" || return
+    _set_parent_hist
 }
-autoload _start_local_hist
 
 function realpath() {
     echo $1(:A)
@@ -168,8 +169,8 @@ function realpath() {
 autoload realpath
 
 function _set_parent_hist() {
-    lh=""
-    cdir="./"
+    local lh="" cdir="./"
+    local next_histsize=$HISTSIZE next_savehist=$SAVEHIST
     while [[ "$(realpath "$cdir")" != "/" ]]; do
         [[ -O $cdir".zshhistory" && -w $cdir".zshhistory" ]] && {
             lh="$(realpath $cdir".zshhistory")"
@@ -177,16 +178,23 @@ function _set_parent_hist() {
         }
         cdir="../$cdir"
     done
-    [[ "$lh" != "$HISTFILE" ]] && [[ "$lh" != "" ]] && {
-        fc -AI "$HISTFILE"
-        export HISTFILE="$lh"
-        fc -RI "$HISTFILE"
+    [[ -n "$lh" ]] || return 0
+    if [[ "$lh" != "$HISTFILE" ]] || (( ! ${_local_hist_context:-0} )); then
+        fc -AI "$HISTFILE" || return
+        # Replace the previous context so searches only see this file's history.
+        # Keep one context on the stack, regardless of how often we change dirs.
+        if (( ${_local_hist_context:-0} )); then
+            fc -P || return
+        fi
+        fc -p "$lh" "$next_histsize" "$next_savehist" || return
+        typeset -g _local_hist_context=1
+        export HISTFILE
         echo "new histfile $HISTFILE"
-    }
+    fi
 }
 autoload _set_parent_hist
 
-chpwd_functions=(${chpwd_functions[@]} "_set_parent_hist")
+chpwd_functions=(${chpwd_functions:#_set_parent_hist} _set_parent_hist)
 
 _set_parent_hist
 
