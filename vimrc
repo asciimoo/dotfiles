@@ -1646,7 +1646,8 @@ let g:pymode_options_max_line_length = 120
 
 "Linting
 let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+let g:pymode_lint_checkers = ['pyflakes']
 let g:pymode_lint_config = '$HOME/.pylintrc'
 let g:pymode_lint_options_pep8 = {
         \ 'max_line_length': 120
